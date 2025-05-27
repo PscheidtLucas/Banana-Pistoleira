@@ -15,7 +15,7 @@ var direction := Vector2.ZERO
 enum States {IDLE, RUNNING, ROLLING, DYING, }
 @export var current_state: States : set = set_state
 
-# Várias para acessar os nós filhos:
+# Váriaveis para acessar os nós filhos:
 @onready var dash_cooldown_timer: Timer = %DashCooldownTimer
 @onready var body_animated_sprite: AnimatedSprite2D = %BodyAnimatedSprite
 

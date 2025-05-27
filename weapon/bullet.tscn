@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvigvnuq577cm"]
+
+[ext_resource type="Script" uid="uid://8ilk5xiumd7u" path="res://weapon/bullet.gd" id="1_d6cvk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d6cvk"]
+
+[node name="Bullet" type="Area2D"]
+rotation = 0.129101
+script = ExtResource("1_d6cvk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d6cvk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
