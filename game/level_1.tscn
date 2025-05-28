@@ -1,10 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqn7bb3fkjxas"]
+[gd_scene load_steps=4 format=3 uid="uid://cqn7bb3fkjxas"]
 
 [ext_resource type="PackedScene" uid="uid://crvp28mw5q0mx" path="res://player/player.tscn" id="1_oo0i2"]
 [ext_resource type="Script" uid="uid://uxo3n1cuyjtm" path="res://game/level_1.gd" id="1_xnux1"]
+[ext_resource type="Script" uid="uid://cfvcy5oey458w" path="res://enemy/enemy_spawner.gd" id="3_m8qid"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_xnux1")
 
 [node name="Player" parent="." instance=ExtResource("1_oo0i2")]
 position = Vector2(495, 260)
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("3_m8qid")
+
+[node name="Timer" type="Timer" parent="EnemySpawner"]

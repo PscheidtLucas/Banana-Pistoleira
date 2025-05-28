@@ -1,5 +1,11 @@
-[gd_scene format=3 uid="uid://duqcknr0ktv0s"]
+[gd_scene load_steps=3 format=3 uid="uid://duqcknr0ktv0s"]
+
+[ext_resource type="Script" uid="uid://dwddopj2kp1xj" path="res://weapon/weapon.gd" id="1_4ht74"]
+[ext_resource type="PackedScene" uid="uid://cvigvnuq577cm" path="res://weapon/bullet.tscn" id="2_q8tx2"]
 
 [node name="Weapon" type="Sprite2D"]
+script = ExtResource("1_4ht74")
+bullet_scene = ExtResource("2_q8tx2")
 
 [node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(19, 0)

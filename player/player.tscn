@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://crvp28mw5q0mx"]
+[gd_scene load_steps=6 format=3 uid="uid://crvp28mw5q0mx"]
 
 [ext_resource type="Script" uid="uid://0mv3fd0jdj5q" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="Texture2D" uid="uid://cq6btt0elq7m0" path="res://icon.svg" id="2_rkbax"]
+[ext_resource type="PackedScene" uid="uid://duqcknr0ktv0s" path="res://weapon/weapon.tscn" id="3_g1dw6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kqu6x"]
 animations = [{
@@ -48,3 +49,5 @@ shape = SubResource("CircleShape2D_rkbax")
 [node name="DashCooldownTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="Weapon" parent="." instance=ExtResource("3_g1dw6")]
