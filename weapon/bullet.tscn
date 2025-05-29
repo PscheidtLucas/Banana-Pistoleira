@@ -1,13 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvigvnuq577cm"]
+[gd_scene load_steps=4 format=3 uid="uid://cvigvnuq577cm"]
 
 [ext_resource type="Script" uid="uid://8ilk5xiumd7u" path="res://weapon/bullet.gd" id="1_d6cvk"]
+[ext_resource type="Texture2D" uid="uid://c5avrddr45aho" path="res://weapon/bala ajustada.png" id="2_ge33b"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_d6cvk"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8cc10"]
+size = Vector2(38, 14)
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_d6cvk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_d6cvk")
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_8cc10")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Bala" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.1, 0.2)
+texture = ExtResource("2_ge33b")

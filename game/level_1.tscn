@@ -1,16 +1,160 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqn7bb3fkjxas"]
+[gd_scene load_steps=18 format=3 uid="uid://cqn7bb3fkjxas"]
 
 [ext_resource type="PackedScene" uid="uid://crvp28mw5q0mx" path="res://player/player.tscn" id="1_oo0i2"]
 [ext_resource type="Script" uid="uid://uxo3n1cuyjtm" path="res://game/level_1.gd" id="1_xnux1"]
 [ext_resource type="Script" uid="uid://cfvcy5oey458w" path="res://enemy/enemy_spawner.gd" id="3_m8qid"]
+[ext_resource type="Texture2D" uid="uid://d01tn307puiy6" path="res://game/Cenário/cenario banana inteiro.png" id="4_g0ys1"]
+[ext_resource type="Texture2D" uid="uid://cr5heusugi25y" path="res://game/Cenário/cenario banana 1.png" id="5_sjlj3"]
+[ext_resource type="Texture2D" uid="uid://rfys581sqcq4" path="res://game/Cenário/cacto ajustado 1.png" id="7_34xli"]
+[ext_resource type="Texture2D" uid="uid://5hvsnq0f6yab" path="res://game/Cenário/cacto ajustado 2.png" id="8_1b54y"]
+[ext_resource type="Texture2D" uid="uid://c6kbyxmn5dd0i" path="res://game/Cenário/sombra ajustada 1.png" id="8_wcxg3"]
+[ext_resource type="Script" uid="uid://buy4hs1hlx1lo" path="res://game/skew_tween.gd" id="9_wcxg3"]
+[ext_resource type="Texture2D" uid="uid://ormolftgayvc" path="res://game/Cenário/sombra ajustada 2.png" id="11_k3ob8"]
+[ext_resource type="Texture2D" uid="uid://dhiq4h5cfh4hc" path="res://game/Cenário/pedra ajustada 1.png" id="12_4ocg2"]
+[ext_resource type="Texture2D" uid="uid://c0pu882lw6a3r" path="res://game/Cenário/sombra pedra ajustada 1.png" id="13_a4bdo"]
+[ext_resource type="Texture2D" uid="uid://buek56fgdcset" path="res://game/Cenário/pedra ajustada 2.png" id="14_6h1kn"]
+[ext_resource type="Texture2D" uid="uid://dx0gt1hpa8an" path="res://game/Cenário/mato ajustado 2.png" id="15_a4bdo"]
+[ext_resource type="Texture2D" uid="uid://566wtaxim1tt" path="res://game/Cenário/sombra pedra ajustada 2.png" id="15_hekkb"]
+[ext_resource type="Texture2D" uid="uid://bi11xcnmyou1f" path="res://game/Cenário/mato ajustado.png" id="16_6h1kn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4bdo"]
+size = Vector2(390, 321)
 
 [node name="Level1" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_xnux1")
-
-[node name="Player" parent="." instance=ExtResource("1_oo0i2")]
-position = Vector2(495, 260)
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource("3_m8qid")
 
-[node name="Timer" type="Timer" parent="EnemySpawner"]
+[node name="SpawnerTimer" type="Timer" parent="EnemySpawner"]
+
+[node name="SpawnerPos" type="Marker2D" parent="EnemySpawner"]
+unique_name_in_owner = true
+position = Vector2(1393, 231)
+
+[node name="Player" parent="." instance=ExtResource("1_oo0i2")]
+position = Vector2(985, 490)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(1.5, 1.5)
+limit_left = 0
+limit_top = 0
+limit_right = 1920
+limit_bottom = 1080
+limit_smoothed = true
+
+[node name="CenarioBananaInteiro" type="Sprite2D" parent="."]
+position = Vector2(2971, 541)
+texture = ExtResource("4_g0ys1")
+
+[node name="AssetsCenário" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="CenarioBanana1" type="Sprite2D" parent="AssetsCenário"]
+z_index = -100
+texture = ExtResource("5_sjlj3")
+centered = false
+
+[node name="PedraAjustada1" type="Sprite2D" parent="AssetsCenário"]
+position = Vector2(106, 954)
+texture = ExtResource("12_4ocg2")
+
+[node name="SombraPedraAjustada1" type="Sprite2D" parent="AssetsCenário/PedraAjustada1"]
+modulate = Color(1, 1, 1, 0.588235)
+show_behind_parent = true
+position = Vector2(-3, 18)
+texture = ExtResource("13_a4bdo")
+
+[node name="PedraAjustada2" type="Sprite2D" parent="AssetsCenário"]
+position = Vector2(186, 989)
+texture = ExtResource("14_6h1kn")
+
+[node name="SombraPedraAjustada2" type="Sprite2D" parent="AssetsCenário/PedraAjustada2"]
+modulate = Color(1, 1, 1, 0.588235)
+show_behind_parent = true
+position = Vector2(-2, 11)
+texture = ExtResource("15_hekkb")
+
+[node name="CactoAjustado1" type="Sprite2D" parent="AssetsCenário"]
+position = Vector2(1806, 1028)
+texture = ExtResource("7_34xli")
+offset = Vector2(-4, -91)
+
+[node name="SombraAjustada1" type="Sprite2D" parent="AssetsCenário/CactoAjustado1"]
+modulate = Color(1, 1, 1, 0.352941)
+position = Vector2(-22, 35)
+texture = ExtResource("8_wcxg3")
+
+[node name="SkewTween" type="Node" parent="AssetsCenário/CactoAjustado1"]
+script = ExtResource("9_wcxg3")
+amount_to_skew = 4.0
+tween_duration = 2.4
+metadata/_custom_type_script = "uid://buy4hs1hlx1lo"
+
+[node name="CactoAjustado2" type="Sprite2D" parent="AssetsCenário"]
+position = Vector2(1640, 987)
+texture = ExtResource("8_1b54y")
+offset = Vector2(-1, -64)
+
+[node name="SombraAjustada2" type="Sprite2D" parent="AssetsCenário/CactoAjustado2"]
+modulate = Color(1, 1, 1, 0.356863)
+position = Vector2(-12, 26)
+texture = ExtResource("11_k3ob8")
+
+[node name="SkewTween" type="Node" parent="AssetsCenário/CactoAjustado2" node_paths=PackedStringArray("node_to_tween")]
+script = ExtResource("9_wcxg3")
+node_to_tween = NodePath("..")
+amount_to_skew = 5.0
+tween_duration = 2.0
+
+[node name="MatoAjustado2" type="Sprite2D" parent="."]
+position = Vector2(476, 539)
+texture = ExtResource("15_a4bdo")
+offset = Vector2(-1, -14)
+
+[node name="SkewTween" type="Node" parent="MatoAjustado2"]
+script = ExtResource("9_wcxg3")
+amount_to_skew = 16.0
+tween_duration = 1.85
+metadata/_custom_type_script = "uid://buy4hs1hlx1lo"
+
+[node name="MatoAjustado" type="Sprite2D" parent="."]
+position = Vector2(376, 500)
+texture = ExtResource("16_6h1kn")
+offset = Vector2(-1, -33)
+
+[node name="SkewTween" type="Node" parent="MatoAjustado"]
+script = ExtResource("9_wcxg3")
+amount_to_skew = 7.0
+tween_duration = 2.25
+metadata/_custom_type_script = "uid://buy4hs1hlx1lo"
+
+[node name="MatoAjustado3" type="Sprite2D" parent="."]
+position = Vector2(1427, 767)
+texture = ExtResource("15_a4bdo")
+offset = Vector2(-1, -14)
+
+[node name="SkewTween" type="Node" parent="MatoAjustado3"]
+script = ExtResource("9_wcxg3")
+amount_to_skew = 16.0
+tween_duration = 1.75
+metadata/_custom_type_script = "uid://buy4hs1hlx1lo"
+
+[node name="MatoAjustado4" type="Sprite2D" parent="."]
+position = Vector2(1324, 796)
+texture = ExtResource("16_6h1kn")
+offset = Vector2(-1, -33)
+flip_h = true
+
+[node name="SkewTween" type="Node" parent="MatoAjustado4"]
+script = ExtResource("9_wcxg3")
+amount_to_skew = 11.0
+tween_duration = 1.9
+metadata/_custom_type_script = "uid://buy4hs1hlx1lo"
+
+[node name="PlayerLimits" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerLimits"]
+position = Vector2(1386, 183)
+shape = SubResource("RectangleShape2D_a4bdo")

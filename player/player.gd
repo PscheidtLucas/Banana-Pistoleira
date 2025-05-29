@@ -6,8 +6,8 @@ class_name Player extends CharacterBody2D
 var roll_speed: float = 900
 var running_speed: float = 300
 var current_speed : float = running_speed
-var acceleration : float = 2100
-var deceleration : float = 1850
+var acceleration : float = 3000
+var deceleration : float = 2200
 var direction := Vector2.ZERO
 
 # Declaramos um enum, ele funciona como um atalho legível para salvar as constantes resposáveis

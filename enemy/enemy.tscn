@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7ouejtd41g1o"]
+[gd_scene load_steps=4 format=3 uid="uid://b7ouejtd41g1o"]
 
 [ext_resource type="Script" uid="uid://bsitvu378tlg3" path="res://enemy/enemy.gd" id="1_2mvqj"]
+[ext_resource type="PackedScene" uid="uid://duqcknr0ktv0s" path="res://weapon/weapon.tscn" id="2_ofsxj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2mvqj"]
 radius = 10.0499
@@ -12,3 +13,10 @@ script = ExtResource("1_2mvqj")
 shape = SubResource("CircleShape2D_2mvqj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="WeaponPivot" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="WeaponPivot"]
+position = Vector2(20, 0)
+
+[node name="Weapon" parent="WeaponPivot/Marker2D" instance=ExtResource("2_ofsxj")]

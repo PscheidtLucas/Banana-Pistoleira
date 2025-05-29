@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://crvp28mw5q0mx"]
+[gd_scene load_steps=7 format=3 uid="uid://crvp28mw5q0mx"]
 
 [ext_resource type="Script" uid="uid://0mv3fd0jdj5q" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="Texture2D" uid="uid://cq6btt0elq7m0" path="res://icon.svg" id="2_rkbax"]
 [ext_resource type="PackedScene" uid="uid://duqcknr0ktv0s" path="res://weapon/weapon.tscn" id="3_g1dw6"]
+[ext_resource type="Script" uid="uid://dn5rqyw3u6sgv" path="res://player/wapon_pivot.gd" id="4_qjkh3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kqu6x"]
 animations = [{
@@ -39,15 +40,24 @@ script = ExtResource("1_oul6g")
 
 [node name="BodyAnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(0, -32)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_kqu6x")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
 shape = SubResource("CircleShape2D_rkbax")
 
 [node name="DashCooldownTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
 
-[node name="Weapon" parent="." instance=ExtResource("3_g1dw6")]
+[node name="WaponPivot" type="Node2D" parent="."]
+position = Vector2(0, -32)
+script = ExtResource("4_qjkh3")
+
+[node name="WeaponAnchor" type="Marker2D" parent="WaponPivot"]
+position = Vector2(55, 0)
+
+[node name="Weapon" parent="WaponPivot/WeaponAnchor" instance=ExtResource("3_g1dw6")]
