@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr5heusugi25y"
-path="res://.godot/imported/cenario banana 1.png-85afc74780e05a5ee8ade1d8c4adb9fd.ctex"
+uid="uid://5hvsnq0f6yab"
+path="res://.godot/imported/cacto ajustado 2.png-2a2a7ef8f318b8d7d79f54f8b3d62b4e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/Cenário/cenario banana 1.png"
-dest_files=["res://.godot/imported/cenario banana 1.png-85afc74780e05a5ee8ade1d8c4adb9fd.ctex"]
+source_file="res://game/Cenário/cacto ajustado 2.png"
+dest_files=["res://.godot/imported/cacto ajustado 2.png-2a2a7ef8f318b8d7d79f54f8b3d62b4e.ctex"]
 
 [params]
 

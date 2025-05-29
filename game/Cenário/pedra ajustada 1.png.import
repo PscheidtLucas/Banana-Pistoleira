@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr5heusugi25y"
-path="res://.godot/imported/cenario banana 1.png-85afc74780e05a5ee8ade1d8c4adb9fd.ctex"
+uid="uid://dhiq4h5cfh4hc"
+path="res://.godot/imported/pedra ajustada 1.png-650abb9ca0aef5691ea1fb8af030db0e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/Cenário/cenario banana 1.png"
-dest_files=["res://.godot/imported/cenario banana 1.png-85afc74780e05a5ee8ade1d8c4adb9fd.ctex"]
+source_file="res://game/Cenário/pedra ajustada 1.png"
+dest_files=["res://.godot/imported/pedra ajustada 1.png-650abb9ca0aef5691ea1fb8af030db0e.ctex"]
 
 [params]
 

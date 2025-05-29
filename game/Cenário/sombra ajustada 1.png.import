@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7h7wk72tsr6i"
-path="res://.godot/imported/cenario banana garrafas.png-c296c642eaf25a83759c6fcdbadfdbf4.ctex"
+uid="uid://c6kbyxmn5dd0i"
+path="res://.godot/imported/sombra ajustada 1.png-eaf21998cb6c0f59552b996990835a2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/Cenário/cenario banana garrafas.png"
-dest_files=["res://.godot/imported/cenario banana garrafas.png-c296c642eaf25a83759c6fcdbadfdbf4.ctex"]
+source_file="res://game/Cenário/sombra ajustada 1.png"
+dest_files=["res://.godot/imported/sombra ajustada 1.png-eaf21998cb6c0f59552b996990835a2c.ctex"]
 
 [params]
 

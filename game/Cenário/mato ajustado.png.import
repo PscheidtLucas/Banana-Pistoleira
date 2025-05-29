@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8ek2ng6psjht"
-path="res://.godot/imported/matinho.png-f67a077a0b6fe3e59f123e9f838cd909.ctex"
+uid="uid://bi11xcnmyou1f"
+path="res://.godot/imported/mato ajustado.png-98e3bc7575033aff01c57fc07564fbb4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/Cenário/matinho.png"
-dest_files=["res://.godot/imported/matinho.png-f67a077a0b6fe3e59f123e9f838cd909.ctex"]
+source_file="res://game/Cenário/mato ajustado.png"
+dest_files=["res://.godot/imported/mato ajustado.png-98e3bc7575033aff01c57fc07564fbb4.ctex"]
 
 [params]
 

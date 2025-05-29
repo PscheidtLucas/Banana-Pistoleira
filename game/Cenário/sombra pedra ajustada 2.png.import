@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhglsoo4aqush"
-path="res://.godot/imported/cenario banana cactos.png-e209ef198db76e1e77047e7b6b80dbb5.ctex"
+uid="uid://566wtaxim1tt"
+path="res://.godot/imported/sombra pedra ajustada 2.png-ad28500ef770e443f01b50e83811b187.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/Cenário/cenario banana cactos.png"
-dest_files=["res://.godot/imported/cenario banana cactos.png-e209ef198db76e1e77047e7b6b80dbb5.ctex"]
+source_file="res://game/Cenário/sombra pedra ajustada 2.png"
+dest_files=["res://.godot/imported/sombra pedra ajustada 2.png-ad28500ef770e443f01b50e83811b187.ctex"]
 
 [params]
 

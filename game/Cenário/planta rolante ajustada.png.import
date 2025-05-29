@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg8xpaxm2cbu1"
-path="res://.godot/imported/bala.png-59c618a852a08eebd25ea4ddbd023203.ctex"
+uid="uid://da67hwagfxqjm"
+path="res://.godot/imported/planta rolante ajustada.png-182d6134951505204a679fdc1d3ea11d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://weapon/bala.png"
-dest_files=["res://.godot/imported/bala.png-59c618a852a08eebd25ea4ddbd023203.ctex"]
+source_file="res://game/Cenário/planta rolante ajustada.png"
+dest_files=["res://.godot/imported/planta rolante ajustada.png-182d6134951505204a679fdc1d3ea11d.ctex"]
 
 [params]
 

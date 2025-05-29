@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr5heusugi25y"
-path="res://.godot/imported/cenario banana 1.png-85afc74780e05a5ee8ade1d8c4adb9fd.ctex"
+uid="uid://c5avrddr45aho"
+path="res://.godot/imported/bala ajustada.png-e17f964e40abdb2268074b27e6407370.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/Cenário/cenario banana 1.png"
-dest_files=["res://.godot/imported/cenario banana 1.png-85afc74780e05a5ee8ade1d8c4adb9fd.ctex"]
+source_file="res://weapon/bala ajustada.png"
+dest_files=["res://.godot/imported/bala ajustada.png-e17f964e40abdb2268074b27e6407370.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8f1o3ppxhi1i"
-path="res://.godot/imported/cenario banana garrafas sombra.png-2b85491e403b90d2bdf92d793c311a6c.ctex"
+uid="uid://buek56fgdcset"
+path="res://.godot/imported/pedra ajustada 2.png-a08dcb0c8cf70567091d5439a974f628.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/Cenário/cenario banana garrafas sombra.png"
-dest_files=["res://.godot/imported/cenario banana garrafas sombra.png-2b85491e403b90d2bdf92d793c311a6c.ctex"]
+source_file="res://game/Cenário/pedra ajustada 2.png"
+dest_files=["res://.godot/imported/pedra ajustada 2.png-a08dcb0c8cf70567091d5439a974f628.ctex"]
 
 [params]
 

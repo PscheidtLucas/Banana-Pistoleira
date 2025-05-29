@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr5heusugi25y"
-path="res://.godot/imported/cenario banana 1.png-85afc74780e05a5ee8ade1d8c4adb9fd.ctex"
+uid="uid://dx0gt1hpa8an"
+path="res://.godot/imported/mato ajustado 2.png-bb18235748b6c942e602812af8e7523d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/Cenário/cenario banana 1.png"
-dest_files=["res://.godot/imported/cenario banana 1.png-85afc74780e05a5ee8ade1d8c4adb9fd.ctex"]
+source_file="res://game/Cenário/mato ajustado 2.png"
+dest_files=["res://.godot/imported/mato ajustado 2.png-bb18235748b6c942e602812af8e7523d.ctex"]
 
 [params]
 
