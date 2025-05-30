@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://b86lavvk2fasm"]
+
+[ext_resource type="Script" uid="uid://djjt4dsaq74ld" path="res://UI/main_menu.gd" id="1_d8nwk"]
+[ext_resource type="Texture2D" uid="uid://bf3dsv855j0ay" path="res://UI/banana menu.png" id="1_p8ccj"]
+[ext_resource type="Script" uid="uid://cj51fow78ns5j" path="res://UI/node_2d.gd" id="2_tk8dj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d8nwk"]
+font_size = 48
+font_color = Color(0.341176, 0.129412, 0.129412, 1)
+outline_size = 2
+outline_color = Color(0.95674, 0.542058, 0.164219, 1)
+shadow_size = 4
+shadow_color = Color(1, 0.612, 0.318, 0.525)
+shadow_offset = Vector2(2, 5)
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_d8nwk")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_p8ccj")
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("2_tk8dj")
+
+[node name="Label" type="Label" parent="Node2D"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 515.0
+offset_top = 890.0
+offset_right = 1405.0
+offset_bottom = 945.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Clique em qualquer lugar para inciar"
+label_settings = SubResource("LabelSettings_d8nwk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

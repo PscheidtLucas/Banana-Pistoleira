@@ -52,7 +52,7 @@ func _on_spawner_timer_timeout() -> void:
 	# Conta mais uma wave
 	wave_count += 1
 	
-	# A cada 2 waves, aumentamos a quantidade de inimigos por wave 
+	# A cada 1 waves, aumentamos a quantidade de inimigos por wave 
 	if wave_count % 1 == 0:
 		enemies_per_wave += 1
 

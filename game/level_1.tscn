@@ -1,5 +1,6 @@
-[gd_scene load_steps=35 format=3 uid="uid://cqn7bb3fkjxas"]
+[gd_scene load_steps=36 format=3 uid="uid://cqn7bb3fkjxas"]
 
+[ext_resource type="Script" uid="uid://bwqu04qhfyu0e" path="res://game/level_1.gd" id="1_1nuos"]
 [ext_resource type="PackedScene" uid="uid://crvp28mw5q0mx" path="res://player/player.tscn" id="1_oo0i2"]
 [ext_resource type="Script" uid="uid://cfvcy5oey458w" path="res://enemy/enemy_spawner.gd" id="3_m8qid"]
 [ext_resource type="Texture2D" uid="uid://d01tn307puiy6" path="res://game/Cenário/cenario banana inteiro.png" id="4_g0ys1"]
@@ -60,6 +61,7 @@ font_size = 180
 
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_1nuos")
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource("3_m8qid")
@@ -308,6 +310,14 @@ script = ExtResource("20_78mi1")
 position = Vector2(91, 26)
 scale = Vector2(1.04138, 1.04138)
 texture = ExtResource("19_eg035")
+
+[node name="ColorRect" type="ColorRect" parent="PlacarEVida"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="DeathScreen" type="CanvasLayer" parent="."]
 script = ExtResource("22_78mi1")

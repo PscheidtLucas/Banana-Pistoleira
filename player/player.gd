@@ -84,8 +84,10 @@ func _physics_process(delta: float) -> void:
 	# Inverte o sprite horizontalmente baseado na direção
 	if direction.x < -0.1:
 		body_animated_sprite.flip_h = true
+		%ChapeuSprite.flip_h = true
 	elif direction.x > 0.1:
 		body_animated_sprite.flip_h = false
+		%ChapeuSprite.flip_h = false
 
 
 	# Checagem para ver se tem input do jogador, se tiver e for maior que 1.0,
