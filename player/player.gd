@@ -19,11 +19,11 @@ enum States {IDLE, RUNNING, ROLLING, DYING, }
 @export var current_state: States : set = set_state
 
 # enum para controlar os estados do chapéu:
-enum HatStates {SHOW_IDLE, HIDE_IDLE, THROW, COMING_BACK}
-var hat_current_state: HatStates = HatStates.SHOW_IDLE
+enum HatStates {SHOW_IDLE, THROW, COMING_BACK}
+var hat_current_state: HatStates = HatStates.SHOW_IDLE : set = set_hat_state
 # Hide idle é para ser quando o chapéu não foi lançado e a banana está rolando
 
-var chapeu_original_pos : Vector2
+var chapeu_original_pos : Vector2 #variável da posição inicial do chapéu
 
 # Váriaveis para acessar os nós filhos:
 @onready var dash_cooldown_timer: Timer = %DashCooldownTimer
@@ -43,10 +43,26 @@ func set_state(new_state: States) -> void:
 			body_animated_sprite.play("run")
 		States.ROLLING:
 			body_animated_sprite.play("roll")
+			if hat_current_state == HatStates.SHOW_IDLE:
+				%ChapeuArea.hide()
+				await get_tree().create_timer(0.5).timeout
+				%ChapeuArea.show()
 		States.DYING:
 			body_animated_sprite.play("die")
 
+func set_hat_state(new_state: HatStates) -> void:
+	hat_current_state = new_state
+	if hat_current_state == HatStates.SHOW_IDLE:
+		chapeu_area.can_damage = false
+		%ChapeuSprite.play("idle")
+	else:
+		chapeu_area.can_damage = true
+		%ChapeuSprite.play("voando")
+
+			
+
 func _ready() -> void:
+	player_died.connect(_on_player_died)
 	chapeu_area.body_entered.connect(func(body: Node2D)->void:
 		if body is Enemy:
 			)
@@ -128,11 +144,22 @@ func _input(event: InputEvent) -> void:
 func throw_hat():
 	if hat_current_state == HatStates.SHOW_IDLE:
 		hat_current_state = HatStates.THROW
-		await get_tree().create_timer(3.5).timeout
+		await get_tree().create_timer(2).timeout
 		hat_current_state = HatStates.COMING_BACK
 	
 func take_damage(amount: int):
 	health -= amount
-	if health <= 0:
+	if health <= 0 and current_state != States.DYING:
 		current_state = States.DYING
 		player_died.emit()
+
+# Lógica para quando o player morre ele parar de atirar e esconder o chapeu
+func _on_player_died():
+	$CollisionShape2D.set_deferred("disabled", true)
+	chapeu_area.can_damage = false
+	chapeu_area.hide()
+	chapeu_area.monitorable = false
+	chapeu_area.monitoring = false
+	$WaponPivot.hide()
+	$WaponPivot/WeaponAnchor/Weapon.set_physics_process(false)
+	

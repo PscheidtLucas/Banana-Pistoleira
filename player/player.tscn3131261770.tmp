@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://crvp28mw5q0mx"]
+[gd_scene load_steps=27 format=3 uid="uid://crvp28mw5q0mx"]
 
 [ext_resource type="Script" uid="uid://0mv3fd0jdj5q" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="Texture2D" uid="uid://fnmb7nfxfn1a" path="res://player/banana/idle/idle 1.png" id="2_g4c7l"]
@@ -9,11 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://8emnjinsqlju" path="res://player/banana/idle/idle 3.png" id="4_7pqkx"]
 [ext_resource type="Script" uid="uid://dn5rqyw3u6sgv" path="res://player/wapon_pivot.gd" id="4_qjkh3"]
 [ext_resource type="Texture2D" uid="uid://b0p5gitlqurlr" path="res://player/banana/Dying/dying 3.png" id="4_r7pn3"]
-[ext_resource type="Texture2D" uid="uid://b1qc5ugk4ihg4" path="res://player/banana/Roll/com chapéu/dash com chapéu 1.png" id="8_bjvpn"]
-[ext_resource type="Texture2D" uid="uid://bomcowhp47bsc" path="res://player/banana/Roll/com chapéu/dash com chapéu 2.png" id="9_s7qer"]
-[ext_resource type="Texture2D" uid="uid://c6ukh7wy32ide" path="res://player/banana/Roll/com chapéu/dash com chapéu 3.png" id="10_g4c7l"]
-[ext_resource type="Texture2D" uid="uid://batiakhtny6um" path="res://player/banana/Roll/com chapéu/dash com chapéu 4.png" id="11_knn7v"]
-[ext_resource type="Texture2D" uid="uid://beoaw25re13i" path="res://player/banana/Roll/com chapéu/dash com chapéu 5.png" id="12_s7qer"]
+[ext_resource type="Texture2D" uid="uid://bpnjcj42v0qb2" path="res://player/banana/Roll/sem chapéu/dash sem chapéu 1.png" id="8_bjvpn"]
+[ext_resource type="Texture2D" uid="uid://bugx0gitnrp1y" path="res://player/banana/Roll/sem chapéu/dash sem chapéu 2.png" id="9_s7qer"]
+[ext_resource type="Texture2D" uid="uid://2of3jntxotgq" path="res://player/banana/Roll/sem chapéu/dash sem chapéu 3.png" id="10_g4c7l"]
+[ext_resource type="Texture2D" uid="uid://cgpt7eqifmof3" path="res://player/banana/Roll/sem chapéu/dash sem chapéu 4.png" id="11_knn7v"]
+[ext_resource type="Texture2D" uid="uid://3wskl67b1pjp" path="res://player/banana/Roll/sem chapéu/dash sem chapéu 5.png" id="12_7pqkx"]
 [ext_resource type="Texture2D" uid="uid://cx8de0e0wrtvp" path="res://player/banana/Walk/andar 1.png" id="15_g4c7l"]
 [ext_resource type="Texture2D" uid="uid://cinf1u66ekdi0" path="res://player/banana/Walk/andar 2.png" id="16_knn7v"]
 [ext_resource type="Texture2D" uid="uid://cp5u6kbuqac3b" path="res://player/banana/Walk/andar 3.png" id="17_7pqkx"]
@@ -23,11 +23,6 @@
 [ext_resource type="Texture2D" uid="uid://ugui64iyevxo" path="res://player/banana/Walk/andar 6.png" id="20_r7pn3"]
 [ext_resource type="Texture2D" uid="uid://ctybg05iciy67" path="res://player/banana/atirar/Banana braço da arma tiro 1.png" id="21_uw77l"]
 [ext_resource type="Script" uid="uid://ovmgkw7fqura" path="res://player/chapeu_area.gd" id="22_s7qer"]
-[ext_resource type="Texture2D" uid="uid://ctsguev0lhthh" path="res://weapon/Chapéu/Banana chapéu voando 2.png" id="24_rptt4"]
-[ext_resource type="Texture2D" uid="uid://dyu6ndy6uanfi" path="res://weapon/Chapéu/Banana chapéu voando 3.png" id="25_r7pn3"]
-[ext_resource type="Texture2D" uid="uid://qewb0mxugxwk" path="res://weapon/Chapéu/Banana chapéu voando 4.png" id="26_b8hi5"]
-[ext_resource type="Texture2D" uid="uid://w4w3i2hk56as" path="res://weapon/Chapéu/Banana chapéu voando 5.png" id="27_2uvqg"]
-[ext_resource type="Texture2D" uid="uid://dfqsei8cs72rv" path="res://weapon/Chapéu/Banana chapéu voando 6.png" id="28_1s1yo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kqu6x"]
 animations = [{
@@ -76,7 +71,7 @@ animations = [{
 "texture": ExtResource("11_knn7v")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_s7qer")
+"texture": ExtResource("12_7pqkx")
 }],
 "loop": false,
 "name": &"roll",
@@ -115,53 +110,18 @@ animations = [{
 radius = 23.0
 height = 86.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_5ejfk"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("25_r7pn3")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("18_e7oew")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_rptt4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_r7pn3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_b8hi5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("27_2uvqg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_1s1yo")
-}],
-"loop": true,
-"name": &"voando",
-"speed": 20.0
-}]
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s7qer"]
 
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_oul6g")
-cooldown_dash = 1.0
 
 [node name="BodyAnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-1, -42)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_kqu6x")
-animation = &"idle"
+animation = &"die"
 offset = Vector2(2, -60)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -190,15 +150,12 @@ position = Vector2(285.251, -59.7767)
 
 [node name="ChapeuArea" type="Area2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -95)
-scale = Vector2(1.2, 1.2)
+position = Vector2(0, -98)
 script = ExtResource("22_s7qer")
 
-[node name="ChapeuSprite" type="AnimatedSprite2D" parent="ChapeuArea"]
-unique_name_in_owner = true
+[node name="ChapeuSprite" type="Sprite2D" parent="ChapeuArea"]
 scale = Vector2(0.1825, 0.1825)
-sprite_frames = SubResource("SpriteFrames_5ejfk")
-animation = &"idle"
+texture = ExtResource("18_e7oew")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChapeuArea"]
 position = Vector2(0, -9)

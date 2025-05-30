@@ -9,7 +9,7 @@ var chase_distance_max = 500
 var health: int = 3
 var score_points_value : int = 10
 
-var player: Player = null
+var player: Player = null # Configuramos a referência ao player no script do spawner
 var speed: int = 250
 
 enum States {CHASE, DIE, SHOOT}
@@ -28,11 +28,6 @@ func set_state(new_state: States) -> void:
 			animated_enemy_sprite_2d.play("die")
 		States.SHOOT:
 			animated_enemy_sprite_2d.play("shoot")
-
-
-func _ready() -> void:
-	player = %Player 	# O síbolo % serve para pegar o nó do jogador por ele conta com um nome único e a gente ter marcado
-						# ele como "Access as unique name"
 
 func _physics_process(delta: float) -> void:
 	if player == null:
@@ -68,19 +63,22 @@ func _process(_delta: float) -> void:
 	if aim_direction.length() > 0.1: # usamos 0.1 para que evitar movimentos desnecessários
 		weapon_pivot.rotation = aim_direction.angle()
 	# mudamos o z index para 3 caso y seja menor q zero para que a arma apareça a frente do inimigo caso ela esteja abaixo dele
-	weapon_pivot.z_index = 3
-	if aim_direction.y < 0.0:
-		weapon_pivot.z_index = 1
-	if global_position.direction_to(player.global_position).x < 0:
-		weapon_pivot.position.x = -74
-	else:
-		weapon_pivot.position.x = 74
+		weapon_pivot.z_index = 3
+		if aim_direction.y < 0.0:
+			weapon_pivot.z_index = 1
+		
+		if global_position.direction_to(player.global_position).x < 0:
+			weapon_pivot.position.x = -74
+		else:
+			weapon_pivot.position.x = 74
 		
 		
 func take_damage(amount: int):
 	health -= amount
 	if health <= 0 and current_state != States.DIE:
 		current_state = States.DIE
+		# Lógica da morte:
+		$CollisionShape2D.set_deferred("disabled", true)
 		if enemy_weapon.has_node("Timer"):
 			enemy_weapon.get_node("Timer").stop()
 		die.emit(score_points_value)
