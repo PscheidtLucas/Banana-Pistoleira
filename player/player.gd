@@ -64,9 +64,6 @@ func set_hat_state(new_state: HatStates) -> void:
 
 func _ready() -> void:
 	player_died.connect(_on_player_died)
-	chapeu_area.body_entered.connect(func(body: Node2D)->void:
-		if body is Enemy:
-			)
 	
 	chapeu_original_pos = chapeu_area.position
 	set_state(States.IDLE)

@@ -5,6 +5,7 @@ extends Node2D
 var can_change_scene: bool = true
 
 func _ready() -> void:
+	color_rect.show()
 	color_rect.modulate.a = 1.0
 	tween()
 

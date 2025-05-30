@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7urnpv78pn0i"]
+[gd_scene load_steps=4 format=3 uid="uid://c7urnpv78pn0i"]
 
 [ext_resource type="Script" uid="uid://cqaw5oshkqcds" path="res://leaderboard_canvas_layer.gd" id="1_6xljt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_34mmv"]
-paragraph_spacing = -30.81
-font_size = 54
+paragraph_spacing = -35.0
+font_size = 70
+
+[sub_resource type="Theme" id="Theme_6xljt"]
+Label/font_sizes/font_size = 40
 
 [node name="LeaderboardCanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_6xljt")
@@ -15,9 +18,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -761.0
+offset_left = -467.0
 offset_top = -425.0
-offset_right = 761.0
+offset_right = 467.0
 offset_bottom = 425.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -38,20 +41,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxScores"]
-visible = false
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 2
-text = "Lucas"
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-text = "180"
+theme = SubResource("Theme_6xljt")
+theme_override_constants/separation = 10
 
 [node name="Button" type="Button" parent="."]
 anchors_preset = 7

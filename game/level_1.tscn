@@ -312,6 +312,7 @@ scale = Vector2(1.04138, 1.04138)
 texture = ExtResource("19_eg035")
 
 [node name="ColorRect" type="ColorRect" parent="PlacarEVida"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -320,6 +321,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="DeathScreen" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("22_78mi1")
 
 [node name="Panel" type="Panel" parent="DeathScreen"]
@@ -380,5 +382,6 @@ theme_override_font_sizes/font_size = 50
 text = "Submit Score"
 
 [node name="LeaderboardCanvasLayer" parent="DeathScreen" instance=ExtResource("23_gtaf5")]
+visible = false
 
 [connection signal="pressed" from="DeathScreen/Panel/Button" to="DeathScreen" method="_on_button_pressed"]
