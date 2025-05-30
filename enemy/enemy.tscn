@@ -1,22 +1,112 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7ouejtd41g1o"]
+[gd_scene load_steps=17 format=3 uid="uid://b7ouejtd41g1o"]
 
 [ext_resource type="Script" uid="uid://bsitvu378tlg3" path="res://enemy/enemy.gd" id="1_2mvqj"]
-[ext_resource type="PackedScene" uid="uid://duqcknr0ktv0s" path="res://weapon/weapon.tscn" id="2_ofsxj"]
+[ext_resource type="Texture2D" uid="uid://bk88t38rxmdn5" path="res://enemy/Macaco/andar/andar 1.png" id="2_gf88j"]
+[ext_resource type="Script" uid="uid://beasnldm315q4" path="res://enemy/enemy_weapon.gd" id="2_ofsxj"]
+[ext_resource type="PackedScene" uid="uid://cvigvnuq577cm" path="res://weapon/bullet.tscn" id="3_ppra6"]
+[ext_resource type="Texture2D" uid="uid://br0a8vxibsoy4" path="res://enemy/Macaco/andar/andar 2.png" id="3_tbw0t"]
+[ext_resource type="Texture2D" uid="uid://c3m1yrb4ih44v" path="res://enemy/Macaco/morte/morte 1.png" id="4_wjonb"]
+[ext_resource type="Texture2D" uid="uid://3mwwrgsmh533" path="res://enemy/Macaco/morte/morte 2.png" id="5_rovcg"]
+[ext_resource type="Texture2D" uid="uid://dread8eh106na" path="res://enemy/Macaco/morte/morte 3.png" id="6_n2hyd"]
+[ext_resource type="Texture2D" uid="uid://dh2hnvc56g51d" path="res://enemy/Macaco/tiro/tiro 1.png" id="7_c6eq3"]
+[ext_resource type="Texture2D" uid="uid://5x6l6msa2r84" path="res://enemy/Macaco/tiro/tiro 2.png" id="8_34gv7"]
+[ext_resource type="Texture2D" uid="uid://26bxmxqv7t8c" path="res://enemy/Macaco/tiro/tiro 3.png" id="9_pg32h"]
+[ext_resource type="Texture2D" uid="uid://cba7q58nom12x" path="res://enemy/Macaco/idle/idle 1.png" id="10_nfy00"]
+[ext_resource type="Texture2D" uid="uid://8sy0iuxefd2s" path="res://enemy/Macaco/idle/idle 2.png" id="11_iocd2"]
+[ext_resource type="Texture2D" uid="uid://chn6vtr58kn3r" path="res://enemy/Macaco/idle/idle 3.png" id="12_05kf6"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2mvqj"]
-radius = 10.0499
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gf88j"]
+radius = 40.0
+height = 104.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ofsxj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gf88j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tbw0t")
+}],
+"loop": true,
+"name": &"chase",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 0.8,
+"texture": ExtResource("4_wjonb")
+}, {
+"duration": 0.3,
+"texture": ExtResource("5_rovcg")
+}, {
+"duration": 10.0,
+"texture": ExtResource("6_n2hyd")
+}],
+"loop": true,
+"name": &"die",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_c6eq3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_34gv7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_pg32h")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_nfy00")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_iocd2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_05kf6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_iocd2")
+}],
+"loop": true,
+"name": &"stop",
+"speed": 10.0
+}]
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_2mvqj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_2mvqj")
+position = Vector2(0, -52)
+shape = SubResource("CapsuleShape2D_gf88j")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedEnemySprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -63)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_ofsxj")
+animation = &"shoot"
+autoplay = "chase"
 
 [node name="WeaponPivot" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="Marker2D" type="Marker2D" parent="WeaponPivot"]
 position = Vector2(20, 0)
 
-[node name="Weapon" parent="WeaponPivot/Marker2D" instance=ExtResource("2_ofsxj")]
+[node name="EnemyWeapon" type="Sprite2D" parent="WeaponPivot/Marker2D"]
+script = ExtResource("2_ofsxj")
+bullet_scene = ExtResource("3_ppra6")
+max_range = 350.0
+max_bullet_speed = 1000.0
+
+[node name="Marker2D" type="Marker2D" parent="WeaponPivot/Marker2D/EnemyWeapon"]
+position = Vector2(55, -62)
+
+[node name="Timer" type="Timer" parent="WeaponPivot/Marker2D/EnemyWeapon"]
+autostart = true

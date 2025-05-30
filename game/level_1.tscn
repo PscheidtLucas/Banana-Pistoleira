@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cqn7bb3fkjxas"]
+[gd_scene load_steps=21 format=3 uid="uid://cqn7bb3fkjxas"]
 
 [ext_resource type="PackedScene" uid="uid://crvp28mw5q0mx" path="res://player/player.tscn" id="1_oo0i2"]
 [ext_resource type="Script" uid="uid://uxo3n1cuyjtm" path="res://game/level_1.gd" id="1_xnux1"]
@@ -16,9 +16,17 @@
 [ext_resource type="Texture2D" uid="uid://dx0gt1hpa8an" path="res://game/Cenário/mato ajustado 2.png" id="15_a4bdo"]
 [ext_resource type="Texture2D" uid="uid://566wtaxim1tt" path="res://game/Cenário/sombra pedra ajustada 2.png" id="15_hekkb"]
 [ext_resource type="Texture2D" uid="uid://bi11xcnmyou1f" path="res://game/Cenário/mato ajustado.png" id="16_6h1kn"]
+[ext_resource type="PackedScene" uid="uid://b7ouejtd41g1o" path="res://enemy/enemy.tscn" id="17_6h1kn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a4bdo"]
 size = Vector2(390, 321)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6h1kn"]
+a = Vector2(1920, 1)
+b = Vector2(0, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_hekkb"]
+a = Vector2(0, 1094)
 
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
@@ -34,6 +42,7 @@ unique_name_in_owner = true
 position = Vector2(1393, 231)
 
 [node name="Player" parent="." instance=ExtResource("1_oo0i2")]
+unique_name_in_owner = true
 position = Vector2(985, 490)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -158,3 +167,20 @@ metadata/_custom_type_script = "uid://buy4hs1hlx1lo"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerLimits"]
 position = Vector2(1386, 183)
 shape = SubResource("RectangleShape2D_a4bdo")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PlayerLimits"]
+shape = SubResource("SegmentShape2D_6h1kn")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="PlayerLimits"]
+position = Vector2(0, 1073)
+shape = SubResource("SegmentShape2D_6h1kn")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="PlayerLimits"]
+shape = SubResource("SegmentShape2D_hekkb")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="PlayerLimits"]
+position = Vector2(1917, 0)
+shape = SubResource("SegmentShape2D_hekkb")
+
+[node name="Enemy" parent="." instance=ExtResource("17_6h1kn")]
+position = Vector2(350, 962)

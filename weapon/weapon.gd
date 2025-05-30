@@ -12,7 +12,7 @@ class_name Weapon extends Node2D
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
-		shoot()
+			shoot()
 
 
 # Faz a arma atirar uma vez, essa função é sobrescrita quando precisa de um comportamente diferente

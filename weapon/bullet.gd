@@ -17,5 +17,5 @@ func _physics_process(delta: float) -> void:
 		
 func _destroy() -> void:
 	var fade_out_tween := create_tween()
-	fade_out_tween.tween_property(self, "modulate:a", 0, 0.2)
+	fade_out_tween.tween_property(self, "modulate:a", 0, 0.1)
 	fade_out_tween.tween_callback(queue_free)

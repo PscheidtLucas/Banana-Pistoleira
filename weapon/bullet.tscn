@@ -4,18 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://c5avrddr45aho" path="res://weapon/bala ajustada.png" id="2_ge33b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8cc10"]
-size = Vector2(38, 14)
+size = Vector2(38, 13)
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_d6cvk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(-19, -0.5)
 shape = SubResource("RectangleShape2D_8cc10")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-
 [node name="Bala" type="Sprite2D" parent="."]
-position = Vector2(0, 1)
-scale = Vector2(0.1, 0.2)
+position = Vector2(-24, 0)
+scale = Vector2(0.7, 1)
 texture = ExtResource("2_ge33b")

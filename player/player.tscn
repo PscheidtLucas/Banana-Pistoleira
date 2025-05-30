@@ -40,10 +40,11 @@ script = ExtResource("1_oul6g")
 
 [node name="BodyAnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -32)
+position = Vector2(-1, -2)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_kqu6x")
 animation = &"idle"
+offset = Vector2(2, -60)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -32)
