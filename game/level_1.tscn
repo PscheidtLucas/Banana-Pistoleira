@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cqn7bb3fkjxas"]
+[gd_scene load_steps=37 format=3 uid="uid://cqn7bb3fkjxas"]
 
 [ext_resource type="Script" uid="uid://bwqu04qhfyu0e" path="res://game/level_1.gd" id="1_1nuos"]
 [ext_resource type="PackedScene" uid="uid://crvp28mw5q0mx" path="res://player/player.tscn" id="1_oo0i2"]
@@ -52,12 +52,32 @@ a = Vector2(0, 1094)
 
 [sub_resource type="LabelSettings" id="LabelSettings_hekkb"]
 font_size = 64
+font_color = Color(0.223529, 0.101961, 0.0745098, 1)
+outline_size = 1
+outline_color = Color(0.929412, 0.607843, 0.168627, 1)
+shadow_size = 2
+shadow_color = Color(0.733564, 0.344326, 0.178987, 0.696)
+shadow_offset = Vector2(3, 3)
 
 [sub_resource type="LabelSettings" id="LabelSettings_btc8a"]
 font_size = 64
+font_color = Color(0.223529, 0.101961, 0.0745098, 1)
+outline_size = 1
+outline_color = Color(0.929412, 0.607843, 0.172549, 1)
+shadow_size = 0
+shadow_color = Color(0.733333, 0.345098, 0.180392, 0.694118)
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1nuos"]
+bg_color = Color(0.336227, 0.20459, 0.17572, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
 
 [sub_resource type="LabelSettings" id="LabelSettings_lb0el"]
 font_size = 180
+font_color = Color(0.774488, 0.366854, 0.161185, 1)
 
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
@@ -321,7 +341,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="DeathScreen" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("22_78mi1")
 
 [node name="Panel" type="Panel" parent="DeathScreen"]
@@ -334,6 +353,7 @@ offset_right = -323.0
 offset_bottom = -199.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1nuos")
 
 [node name="GameOver" type="Label" parent="DeathScreen/Panel"]
 layout_mode = 1
@@ -349,6 +369,7 @@ text = "GAME OVER"
 label_settings = SubResource("LabelSettings_lb0el")
 
 [node name="YourName" type="LineEdit" parent="DeathScreen/Panel"]
+modulate = Color(0.772549, 0.368627, 0.160784, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -361,11 +382,13 @@ offset_right = 275.0
 offset_bottom = 131.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.772549, 0.368627, 0.160784, 1)
 theme_override_font_sizes/font_size = 75
 placeholder_text = "yOUR NAME"
 alignment = 1
 
 [node name="Button" type="Button" parent="DeathScreen/Panel"]
+modulate = Color(0.772549, 0.368627, 0.160784, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
