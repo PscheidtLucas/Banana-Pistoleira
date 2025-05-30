@@ -42,7 +42,7 @@ animations = [{
 "duration": 10.0,
 "texture": ExtResource("6_n2hyd")
 }],
-"loop": true,
+"loop": false,
 "name": &"die",
 "speed": 3.0
 }, {
@@ -90,23 +90,24 @@ unique_name_in_owner = true
 position = Vector2(0, -63)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_ofsxj")
-animation = &"shoot"
+animation = &"die"
 autoplay = "chase"
 
 [node name="WeaponPivot" type="Node2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(74, -63)
 
 [node name="Marker2D" type="Marker2D" parent="WeaponPivot"]
-position = Vector2(20, 0)
+position = Vector2(1, 1)
 
 [node name="EnemyWeapon" type="Sprite2D" parent="WeaponPivot/Marker2D"]
+unique_name_in_owner = true
 script = ExtResource("2_ofsxj")
 bullet_scene = ExtResource("3_ppra6")
 max_range = 350.0
 max_bullet_speed = 1000.0
 
 [node name="Marker2D" type="Marker2D" parent="WeaponPivot/Marker2D/EnemyWeapon"]
-position = Vector2(55, -62)
 
 [node name="Timer" type="Timer" parent="WeaponPivot/Marker2D/EnemyWeapon"]
 autostart = true

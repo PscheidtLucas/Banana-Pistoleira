@@ -1,38 +1,113 @@
-[gd_scene load_steps=7 format=3 uid="uid://crvp28mw5q0mx"]
+[gd_scene load_steps=25 format=3 uid="uid://crvp28mw5q0mx"]
 
 [ext_resource type="Script" uid="uid://0mv3fd0jdj5q" path="res://player/player.gd" id="1_oul6g"]
-[ext_resource type="Texture2D" uid="uid://cq6btt0elq7m0" path="res://icon.svg" id="2_rkbax"]
+[ext_resource type="Texture2D" uid="uid://fnmb7nfxfn1a" path="res://player/banana/idle/idle 1.png" id="2_g4c7l"]
+[ext_resource type="Texture2D" uid="uid://bny3xnnsi3su8" path="res://player/banana/Dying/dying 1.png" id="2_uw77l"]
 [ext_resource type="PackedScene" uid="uid://duqcknr0ktv0s" path="res://weapon/weapon.tscn" id="3_g1dw6"]
+[ext_resource type="Texture2D" uid="uid://jy3cvg70m6aa" path="res://player/banana/idle/idle 2.png" id="3_knn7v"]
+[ext_resource type="Texture2D" uid="uid://blvyyqj0ac4vq" path="res://player/banana/Dying/dying 2.png" id="3_rptt4"]
+[ext_resource type="Texture2D" uid="uid://8emnjinsqlju" path="res://player/banana/idle/idle 3.png" id="4_7pqkx"]
 [ext_resource type="Script" uid="uid://dn5rqyw3u6sgv" path="res://player/wapon_pivot.gd" id="4_qjkh3"]
+[ext_resource type="Texture2D" uid="uid://b0p5gitlqurlr" path="res://player/banana/Dying/dying 3.png" id="4_r7pn3"]
+[ext_resource type="Texture2D" uid="uid://bpnjcj42v0qb2" path="res://player/banana/Roll/sem chapéu/dash sem chapéu 1.png" id="8_bjvpn"]
+[ext_resource type="Texture2D" uid="uid://bugx0gitnrp1y" path="res://player/banana/Roll/sem chapéu/dash sem chapéu 2.png" id="9_s7qer"]
+[ext_resource type="Texture2D" uid="uid://2of3jntxotgq" path="res://player/banana/Roll/sem chapéu/dash sem chapéu 3.png" id="10_g4c7l"]
+[ext_resource type="Texture2D" uid="uid://cgpt7eqifmof3" path="res://player/banana/Roll/sem chapéu/dash sem chapéu 4.png" id="11_knn7v"]
+[ext_resource type="Texture2D" uid="uid://3wskl67b1pjp" path="res://player/banana/Roll/sem chapéu/dash sem chapéu 5.png" id="12_7pqkx"]
+[ext_resource type="Texture2D" uid="uid://cx8de0e0wrtvp" path="res://player/banana/Walk/andar 1.png" id="15_g4c7l"]
+[ext_resource type="Texture2D" uid="uid://cinf1u66ekdi0" path="res://player/banana/Walk/andar 2.png" id="16_knn7v"]
+[ext_resource type="Texture2D" uid="uid://cp5u6kbuqac3b" path="res://player/banana/Walk/andar 3.png" id="17_7pqkx"]
+[ext_resource type="Texture2D" uid="uid://m4xg1x6gjfu5" path="res://weapon/Chapéu/Banana chapéu voando 1.png" id="18_e7oew"]
+[ext_resource type="Texture2D" uid="uid://bjdoub81pqoov" path="res://player/banana/Walk/andar 4.png" id="18_uw77l"]
+[ext_resource type="Texture2D" uid="uid://chts3hl1f6n8b" path="res://player/banana/Walk/andar 5.png" id="19_rptt4"]
+[ext_resource type="Texture2D" uid="uid://ugui64iyevxo" path="res://player/banana/Walk/andar 6.png" id="20_r7pn3"]
+[ext_resource type="Texture2D" uid="uid://ctybg05iciy67" path="res://player/banana/atirar/Banana braço da arma tiro 1.png" id="21_uw77l"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kqu6x"]
 animations = [{
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_uw77l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rptt4")
+}, {
+"duration": 10.0,
+"texture": ExtResource("4_r7pn3")
+}],
+"loop": false,
 "name": &"die",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_rkbax")
+"texture": ExtResource("2_g4c7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_knn7v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7pqkx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_knn7v")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_bjvpn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_s7qer")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_g4c7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_knn7v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_7pqkx")
+}],
+"loop": false,
+"name": &"roll",
+"speed": 14.0
 }, {
 "frames": [],
 "loop": true,
-"name": &"roll",
-"speed": 5.0
+"name": &"roll_sem_chapeu",
+"speed": 6.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_g4c7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_knn7v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_7pqkx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_uw77l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_rptt4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_r7pn3")
+}],
 "loop": true,
 "name": &"run",
-"speed": 5.0
+"speed": 12.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
-radius = 24.0208
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bjvpn"]
+radius = 23.0
+height = 86.0
 
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
@@ -40,25 +115,44 @@ script = ExtResource("1_oul6g")
 
 [node name="BodyAnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-1, -2)
-scale = Vector2(0.5, 0.5)
+position = Vector2(-1, -42)
+scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_kqu6x")
-animation = &"idle"
+animation = &"die"
 offset = Vector2(2, -60)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -32)
-shape = SubResource("CircleShape2D_rkbax")
+position = Vector2(-10, -59)
+shape = SubResource("CapsuleShape2D_bjvpn")
 
 [node name="DashCooldownTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
 
 [node name="WaponPivot" type="Node2D" parent="."]
-position = Vector2(0, -32)
+position = Vector2(-7, -52)
 script = ExtResource("4_qjkh3")
 
 [node name="WeaponAnchor" type="Marker2D" parent="WaponPivot"]
 position = Vector2(55, 0)
 
 [node name="Weapon" parent="WaponPivot/WeaponAnchor" instance=ExtResource("3_g1dw6")]
+position = Vector2(-60.274, -10.8931)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("21_uw77l")
+max_range = 500.0
+
+[node name="Marker2D" parent="WaponPivot/WeaponAnchor/Weapon" index="0"]
+position = Vector2(285.251, -59.7767)
+
+[node name="ChapeuArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -98)
+
+[node name="ChapeuSprite" type="Sprite2D" parent="ChapeuArea"]
+scale = Vector2(0.1825, 0.1825)
+texture = ExtResource("18_e7oew")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChapeuArea"]
+
+[editable path="WaponPivot/WeaponAnchor/Weapon"]

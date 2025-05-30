@@ -2,15 +2,20 @@ class_name Enemy extends CharacterBody2D
 
 @onready var animated_enemy_sprite_2d: AnimatedSprite2D = %AnimatedEnemySprite2D
 @onready var weapon_pivot: Node2D = %WeaponPivot
+@onready var enemy_weapon: Sprite2D = %EnemyWeapon
 
 var chase_distance_min = 350
 var chase_distance_max = 500
+var health: int = 5
+var score_points_value : int = 10
 
 var player: Player = null
 var speed: int = 250
 
-enum States {CHASE, STOP, DIE, SHOOT}
+enum States {CHASE, DIE, SHOOT}
 var current_state: States = States.CHASE: set = set_state
+
+signal die(score_points_value)
 
 func set_state(new_state: States) -> void:
 	var previous_state: States = current_state
@@ -19,8 +24,6 @@ func set_state(new_state: States) -> void:
 	match current_state:
 		States.CHASE:
 			animated_enemy_sprite_2d.play("chase")
-		States.STOP:
-			animated_enemy_sprite_2d.play("stop")
 		States.DIE:
 			animated_enemy_sprite_2d.play("die")
 		States.SHOOT:
@@ -52,8 +55,8 @@ func _physics_process(delta: float) -> void:
 				current_state = States.CHASE
 			velocity = speed * direction_to_player 
 		elif distance_to_player < chase_distance_min:
-			if current_state != States.STOP:
-				current_state = States.STOP
+			if current_state != States.SHOOT:
+				current_state = States.SHOOT
 			velocity = Vector2.ZERO
 		move_and_slide()
 
@@ -68,3 +71,20 @@ func _process(_delta: float) -> void:
 	weapon_pivot.z_index = 3
 	if aim_direction.y < 0.0:
 		weapon_pivot.z_index = 1
+	if global_position.direction_to(player.global_position).x < 0:
+		weapon_pivot.position.x = -74
+	else:
+		weapon_pivot.position.x = 74
+		
+		
+func take_damage(amount: int):
+	health -= amount
+	if health <= 0 and current_state != States.DIE:
+		current_state = States.DIE
+		if enemy_weapon.has_node("Timer"):
+			enemy_weapon.get_node("Timer").stop()
+		die.emit(score_points_value)
+		await get_tree().create_timer(2).timeout
+		queue_free()
+
+	

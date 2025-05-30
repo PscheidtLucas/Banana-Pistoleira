@@ -14,14 +14,16 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
 			shoot()
 
-
 # Faz a arma atirar uma vez, essa função é sobrescrita quando precisa de um comportamente diferente
 func shoot() -> void:
-	var bullet: Node = bullet_scene.instantiate()
-	get_tree().current_scene.add_child(bullet)
+	var bullet: Bullet = bullet_scene.instantiate() 
+	
 
 	bullet.global_position = marker_2d.global_position
 	bullet.global_rotation = marker_2d.global_rotation
 	bullet.max_range = max_range
 	bullet.speed = max_bullet_speed
 	bullet.rotation += randf_range(-random_angle / 2.0, random_angle / 2.0)
+	bullet.targets_player = false
+	
+	get_tree().current_scene.add_child(bullet)

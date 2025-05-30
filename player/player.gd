@@ -10,14 +10,25 @@ var acceleration : float = 3000
 var deceleration : float = 2200
 var direction := Vector2.ZERO
 
+var health:int = 5
+signal player_died
+
 # Declaramos um enum, ele funciona como um atalho legível para salvar as constantes resposáveis
 # por controlar o estado do nosso personagem de forma centralizada em um único lugar:
 enum States {IDLE, RUNNING, ROLLING, DYING, }
 @export var current_state: States : set = set_state
 
+# enum para controlar os estados do chapéu:
+enum HatStates {SHOW_IDLE, HIDE_IDLE, THROW, COMING_BACK}
+var hat_current_state: HatStates = HatStates.SHOW_IDLE
+# Hide idle é para ser quando o chapéu não foi lançado e a banana está rolando
+
+var chapeu_original_pos : Vector2
+
 # Váriaveis para acessar os nós filhos:
 @onready var dash_cooldown_timer: Timer = %DashCooldownTimer
 @onready var body_animated_sprite: AnimatedSprite2D = %BodyAnimatedSprite
+@onready var chapeu_area: Area2D = %ChapeuArea
 
 # Função que é chamada toda vez que o current_state é alterado, 
 # aqui é onde se controla as animações através de um match
@@ -27,15 +38,20 @@ func set_state(new_state: States) -> void:
 
 	match current_state:
 		States.IDLE:
-			body_animated_sprite.animation = "idle"
+			body_animated_sprite.play("idle")
 		States.RUNNING:
-			body_animated_sprite.animation = "run"
+			body_animated_sprite.play("run")
 		States.ROLLING:
-			body_animated_sprite.animation = "roll"
+			body_animated_sprite.play("roll")
 		States.DYING:
-			body_animated_sprite.animation = "die"
+			body_animated_sprite.play("die")
 
 func _ready() -> void:
+	chapeu_area.body_entered.connect(func(body: Node2D)->void:
+		if body is Enemy:
+			)
+	
+	chapeu_original_pos = chapeu_area.position
 	set_state(States.IDLE)
 	
 	# Conecta o sinal "timeout" do DashCooldownTimer a uma função que executa código responsável por
@@ -47,6 +63,13 @@ func _physics_process(delta: float) -> void:
 	# Variável direction pega o Input do jogador:
 	direction.x = Input.get_axis("left", "right")
 	direction.y = Input.get_axis("up", "down")
+
+	# Inverte o sprite horizontalmente baseado na direção
+	if direction.x < -0.1:
+		body_animated_sprite.flip_h = true
+	elif direction.x > 0.1:
+		body_animated_sprite.flip_h = false
+
 
 	# Checagem para ver se tem input do jogador, se tiver e for maior que 1.0,
 	# precisamos normalizar, e então, aceleramos até a "velocidade * direção"
@@ -61,6 +84,18 @@ func _physics_process(delta: float) -> void:
 	# Função da classe CharacterBody2D responsável por fazer com que 
 	# o personagem se movimente através da velocidade:
 	move_and_slide()
+
+	# Lógica do lançamento do chapéu:
+	if hat_current_state == HatStates.THROW:
+		chapeu_area.global_position = chapeu_area.global_position.move_toward(get_global_mouse_position(), 400*delta)
+	elif hat_current_state == HatStates.COMING_BACK:
+		chapeu_area.global_position = chapeu_area.global_position.move_toward(global_position, 400*delta)
+		
+		if chapeu_area.global_position.distance_to(global_position) <= 50:
+			hat_current_state = HatStates.SHOW_IDLE
+			chapeu_area.global_position = global_position
+			chapeu_area.position =  chapeu_original_pos 
+
 	
 	# Lógica para trocar de State:
 	if current_state not in [States.DYING, States.ROLLING]:
@@ -68,7 +103,7 @@ func _physics_process(delta: float) -> void:
 			set_state(States.IDLE)
 		else:
 			set_state(States.RUNNING)
-	print(current_state)
+
 
 # Controla a rolagem do personagem, deixando ele mais rápido por 0.2 segundos, e, depois, volta a velocidade anterior
 func _roll() -> void:
@@ -84,5 +119,20 @@ func _roll() -> void:
 # Função que é chamada toda vez que algum input é pressionado, usamos para 
 # checar quando o botão de rolar é apertado para, então, chamar a função roll
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("roll"):
-		_roll()
+	if current_state not in [States.DYING, States.ROLLING]:
+		if event.is_action_pressed("roll"):
+			_roll()
+		if event.is_action_pressed("special"):
+			throw_hat()
+		
+func throw_hat():
+	if hat_current_state == HatStates.SHOW_IDLE:
+		hat_current_state = HatStates.THROW
+		await get_tree().create_timer(3.5).timeout
+		hat_current_state = HatStates.COMING_BACK
+	
+func take_damage(amount: int):
+	health -= amount
+	if health <= 0:
+		current_state = States.DYING
+		player_died.emit()
