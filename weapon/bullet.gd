@@ -28,8 +28,9 @@ func _on_body_entered(body: Node2D) -> void:
 		if targets_player and body is Player:
 			body.take_damage(damage)
 			_destroy()
-		elif not targets_player and (body is Enemy or body is Destructible):
-			body.take_damage(damage)
-			_destroy()
+		elif not targets_player:
+			if body is Enemy or body is Destructible:
+				body.take_damage(damage)
+				_destroy()
 	else:
 		print("nao tem take damage")

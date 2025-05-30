@@ -6,7 +6,7 @@ class_name Enemy extends CharacterBody2D
 
 var chase_distance_min = 350
 var chase_distance_max = 500
-var health: int = 5
+var health: int = 3
 var score_points_value : int = 10
 
 var player: Player = null
@@ -64,7 +64,7 @@ func _process(_delta: float) -> void:
 	# Lógica da rotação da mira:
 	var aim_direction := Vector2.ZERO
 	if player != null:
-		aim_direction = global_position.direction_to(player.global_position)
+		aim_direction = global_position.direction_to(player.global_position+Vector2(-56,0))
 	if aim_direction.length() > 0.1: # usamos 0.1 para que evitar movimentos desnecessários
 		weapon_pivot.rotation = aim_direction.angle()
 	# mudamos o z index para 3 caso y seja menor q zero para que a arma apareça a frente do inimigo caso ela esteja abaixo dele

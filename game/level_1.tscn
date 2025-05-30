@@ -203,7 +203,7 @@ offset_right = 42.0
 offset_bottom = 52.0
 text = "5"
 
-[node name="DestructibleBox" type="StaticBody2D" parent="."]
+[node name="DestructibleBox" type="CharacterBody2D" parent="."]
 position = Vector2(466, 264)
 script = ExtResource("18_hekkb")
 
