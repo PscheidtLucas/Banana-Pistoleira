@@ -40,6 +40,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxScores"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer"]
@@ -51,3 +52,18 @@ text = "Lucas"
 layout_mode = 2
 size_flags_horizontal = 10
 text = "180"
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = -90.0
+offset_right = 127.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "PLAY AGAIN"

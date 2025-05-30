@@ -1,8 +1,12 @@
 extends CanvasLayer
 
 @onready var v_box_scores: VBoxContainer = %VBoxScores
+@onready var button: Button = $Button
 
 func _ready() -> void:
+	button.pressed.connect(func()->void:
+		Leaderboard.score = 0
+		get_tree().reload_current_scene())
 	pass
 	 #Testes com o leaderboard:
 	#Leaderboard.reset_highscore()

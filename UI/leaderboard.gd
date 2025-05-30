@@ -1,10 +1,17 @@
 extends Node
 
+var score:= 0
+
 var leaderboard: Array = []
 var save_path: String = "user://leaderboard.save"
 const MAX_ENTRIES := 10
 
+signal score_changed(new_score)
+
 func _ready():
+	score_changed.connect(func(new_score)->void:
+		score += new_score)
+	score = 0
 	load_leaderboard()
 
 func add_score(name: String, score: int) -> void:

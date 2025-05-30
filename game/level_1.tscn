@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cqn7bb3fkjxas"]
+[gd_scene load_steps=35 format=3 uid="uid://cqn7bb3fkjxas"]
 
 [ext_resource type="PackedScene" uid="uid://crvp28mw5q0mx" path="res://player/player.tscn" id="1_oo0i2"]
 [ext_resource type="Script" uid="uid://cfvcy5oey458w" path="res://enemy/enemy_spawner.gd" id="3_m8qid"]
@@ -18,6 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://b7ouejtd41g1o" path="res://enemy/enemy.tscn" id="17_6h1kn"]
 [ext_resource type="Script" uid="uid://jnfgddbpxijm" path="res://game/destructible_box.gd" id="18_hekkb"]
 [ext_resource type="Texture2D" uid="uid://c0to13eqrjco2" path="res://game/Cenário/caixa para quebrar.png" id="19_btc8a"]
+[ext_resource type="Texture2D" uid="uid://df3hms0s4m5d4" path="res://game/Tela/coração ajustado.png" id="19_eg035"]
+[ext_resource type="Script" uid="uid://bo8ri8uq6mhhp" path="res://UI/score.gd" id="19_lb0el"]
+[ext_resource type="Script" uid="uid://bcrdy8kbhywu2" path="res://UI/health.gd" id="20_78mi1"]
+[ext_resource type="Script" uid="uid://bh4gnjv6us8k2" path="res://game/death_screen.gd" id="22_78mi1"]
+[ext_resource type="PackedScene" uid="uid://c7urnpv78pn0i" path="res://UI/leaderboard_canvas_layer.tscn" id="23_gtaf5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eg035"]
 size = Vector2(78, 82)
@@ -43,6 +48,15 @@ b = Vector2(0, 0)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hekkb"]
 a = Vector2(0, 1094)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hekkb"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_btc8a"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_lb0el"]
+font_size = 180
 
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
@@ -273,12 +287,88 @@ shape = SubResource("SegmentShape2D_hekkb")
 [node name="PlacarEVida" type="CanvasLayer" parent="."]
 
 [node name="Score" type="Label" parent="PlacarEVida"]
-offset_right = 52.0
-offset_bottom = 23.0
-text = "Score: "
+offset_left = 29.0
+offset_top = 28.0
+offset_right = 213.0
+offset_bottom = 100.0
+text = "Score 0"
+label_settings = SubResource("LabelSettings_hekkb")
+script = ExtResource("19_lb0el")
 
 [node name="Health" type="Label" parent="PlacarEVida"]
-offset_top = 29.0
-offset_right = 42.0
-offset_bottom = 52.0
+offset_left = 1765.0
+offset_top = 28.0
+offset_right = 1807.0
+offset_bottom = 100.0
 text = "5"
+label_settings = SubResource("LabelSettings_btc8a")
+script = ExtResource("20_78mi1")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlacarEVida/Health"]
+position = Vector2(91, 26)
+scale = Vector2(1.04138, 1.04138)
+texture = ExtResource("19_eg035")
+
+[node name="DeathScreen" type="CanvasLayer" parent="."]
+script = ExtResource("22_78mi1")
+
+[node name="Panel" type="Panel" parent="DeathScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 323.0
+offset_top = 174.0
+offset_right = -323.0
+offset_bottom = -199.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOver" type="Label" parent="DeathScreen/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -449.0
+offset_top = 72.0
+offset_right = 449.0
+offset_bottom = 274.0
+grow_horizontal = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_lb0el")
+
+[node name="YourName" type="LineEdit" parent="DeathScreen/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.0
+offset_top = -21.0
+offset_right = 275.0
+offset_bottom = 131.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 75
+placeholder_text = "yOUR NAME"
+alignment = 1
+
+[node name="Button" type="Button" parent="DeathScreen/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = 186.0
+offset_right = 4.0
+offset_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Submit Score"
+
+[node name="LeaderboardCanvasLayer" parent="DeathScreen" instance=ExtResource("23_gtaf5")]
+
+[connection signal="pressed" from="DeathScreen/Panel/Button" to="DeathScreen" method="_on_button_pressed"]

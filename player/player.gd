@@ -12,6 +12,7 @@ var direction := Vector2.ZERO
 
 var health:int = 5
 signal player_died
+signal update_health (health)
 
 # Declaramos um enum, ele funciona como um atalho legível para salvar as constantes resposáveis
 # por controlar o estado do nosso personagem de forma centralizada em um único lugar:
@@ -149,17 +150,21 @@ func throw_hat():
 	
 func take_damage(amount: int):
 	health -= amount
+	update_health.emit(health)
 	if health <= 0 and current_state != States.DYING:
 		current_state = States.DYING
 		player_died.emit()
+		
 
-# Lógica para quando o player morre ele parar de atirar e esconder o chapeu
+# Lógica para quando o player morre ele parar de atirar, andar e esconder o chapeu
 func _on_player_died():
+	set_physics_process(false)
+	set_process(false)
 	$CollisionShape2D.set_deferred("disabled", true)
 	chapeu_area.can_damage = false
 	chapeu_area.hide()
-	chapeu_area.monitorable = false
-	chapeu_area.monitoring = false
+	chapeu_area.set_deferred("monitorable", false)
+	chapeu_area.set_deferred("monitorable", false)
 	$WaponPivot.hide()
 	$WaponPivot/WeaponAnchor/Weapon.set_physics_process(false)
 	

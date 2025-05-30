@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://crvp28mw5q0mx"]
+[gd_scene load_steps=34 format=3 uid="uid://crvp28mw5q0mx"]
 
 [ext_resource type="Script" uid="uid://0mv3fd0jdj5q" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="Texture2D" uid="uid://fnmb7nfxfn1a" path="res://player/banana/idle/idle 1.png" id="2_g4c7l"]
@@ -21,8 +21,9 @@
 [ext_resource type="Texture2D" uid="uid://bjdoub81pqoov" path="res://player/banana/Walk/andar 4.png" id="18_uw77l"]
 [ext_resource type="Texture2D" uid="uid://chts3hl1f6n8b" path="res://player/banana/Walk/andar 5.png" id="19_rptt4"]
 [ext_resource type="Texture2D" uid="uid://ugui64iyevxo" path="res://player/banana/Walk/andar 6.png" id="20_r7pn3"]
-[ext_resource type="Texture2D" uid="uid://ctybg05iciy67" path="res://player/banana/atirar/Banana braço da arma tiro 1.png" id="21_uw77l"]
+[ext_resource type="Texture2D" uid="uid://4n0kjuyn2sph" path="res://player/banana/Braço e chapéu/Banana braço da arma.png" id="21_r7pn3"]
 [ext_resource type="Script" uid="uid://ovmgkw7fqura" path="res://player/chapeu_area.gd" id="22_s7qer"]
+[ext_resource type="Texture2D" uid="uid://bx7gq6yop0ywd" path="res://player/banana/Braço e chapéu/chapéu sem riscos.png" id="23_r7pn3"]
 [ext_resource type="Texture2D" uid="uid://ctsguev0lhthh" path="res://weapon/Chapéu/Banana chapéu voando 2.png" id="24_rptt4"]
 [ext_resource type="Texture2D" uid="uid://dyu6ndy6uanfi" path="res://weapon/Chapéu/Banana chapéu voando 3.png" id="25_r7pn3"]
 [ext_resource type="Texture2D" uid="uid://qewb0mxugxwk" path="res://weapon/Chapéu/Banana chapéu voando 4.png" id="26_b8hi5"]
@@ -119,7 +120,7 @@ height = 86.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("25_r7pn3")
+"texture": ExtResource("23_r7pn3")
 }],
 "loop": true,
 "name": &"idle",
@@ -162,6 +163,7 @@ position = Vector2(-1, -42)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_kqu6x")
 animation = &"idle"
+frame_progress = 0.611056
 offset = Vector2(2, -60)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -173,20 +175,18 @@ unique_name_in_owner = true
 one_shot = true
 
 [node name="WaponPivot" type="Node2D" parent="."]
-position = Vector2(-7, -52)
+position = Vector2(-7, -57)
 script = ExtResource("4_qjkh3")
 
 [node name="WeaponAnchor" type="Marker2D" parent="WaponPivot"]
-position = Vector2(55, 0)
 
 [node name="Weapon" parent="WaponPivot/WeaponAnchor" instance=ExtResource("3_g1dw6")]
-position = Vector2(-60.274, -10.8931)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("21_uw77l")
+texture = ExtResource("21_r7pn3")
 max_range = 500.0
 
 [node name="Marker2D" parent="WaponPivot/WeaponAnchor/Weapon" index="0"]
-position = Vector2(285.251, -59.7767)
+position = Vector2(269.096, -60.4276)
 
 [node name="ChapeuArea" type="Area2D" parent="."]
 unique_name_in_owner = true

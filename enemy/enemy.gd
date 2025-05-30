@@ -15,8 +15,6 @@ var speed: int = 250
 enum States {CHASE, DIE, SHOOT}
 var current_state: States = States.CHASE: set = set_state
 
-signal die(score_points_value)
-
 func set_state(new_state: States) -> void:
 	var previous_state: States = current_state
 	current_state = new_state
@@ -81,7 +79,7 @@ func take_damage(amount: int):
 		$CollisionShape2D.set_deferred("disabled", true)
 		if enemy_weapon.has_node("Timer"):
 			enemy_weapon.get_node("Timer").stop()
-		die.emit(score_points_value)
+		Leaderboard.score_changed.emit(score_points_value)
 		await get_tree().create_timer(2).timeout
 		queue_free()
 

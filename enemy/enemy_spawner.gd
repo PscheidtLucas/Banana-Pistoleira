@@ -22,6 +22,9 @@ var wave_count := 0
 var can_spawn := true
 
 func _ready() -> void:
+	#conectamos o sinal de "jogador morto" aqui para pausar o timer quando ele morrer e parar de spawnar inimigos
+	player.player_died.connect(func()->void:
+		spawner_timer.stop())
 	#criamos um timer para dar uma folga pro jogador antes dos inimigos começarem a spawnar
 	await get_tree().create_timer(0.5).timeout
 	
