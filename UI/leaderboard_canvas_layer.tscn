@@ -1,16 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7urnpv78pn0i"]
+[gd_scene load_steps=5 format=3 uid="uid://c7urnpv78pn0i"]
 
 [ext_resource type="Script" uid="uid://cqaw5oshkqcds" path="res://leaderboard_canvas_layer.gd" id="1_6xljt"]
+[ext_resource type="Texture2D" uid="uid://dfd2ywky6jebv" path="res://game/Tela/Quadro de scores.png" id="2_34mmv"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_34mmv"]
-paragraph_spacing = -35.0
-font_size = 70
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_34mmv"]
 
 [sub_resource type="Theme" id="Theme_6xljt"]
-Label/font_sizes/font_size = 40
+Label/font_sizes/font_size = 25
 
 [node name="LeaderboardCanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_6xljt")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_34mmv")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 8
@@ -18,42 +22,148 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -467.0
-offset_top = -425.0
-offset_right = 467.0
-offset_bottom = 425.0
+offset_left = 4.0
+offset_top = -58.0
+offset_right = 522.0
+offset_bottom = 337.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_34mmv")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "
-Leaderboard"
-label_settings = SubResource("LabelSettings_34mmv")
-horizontal_alignment = 1
-
 [node name="VBoxScores" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
+modulate = Color(0.333333, 0, 0, 1)
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_6xljt")
 theme_override_constants/separation = 10
 
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxScores"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer"]
+layout_mode = 2
+text = "LUCAS"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxScores"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer2"]
+layout_mode = 2
+text = "LUCAS"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer2"]
+layout_mode = 2
+text = "10"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxScores"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer3"]
+layout_mode = 2
+text = "LUCAS"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer3"]
+layout_mode = 2
+text = "10"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxScores"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer4"]
+layout_mode = 2
+text = "LUCAS"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer4"]
+layout_mode = 2
+text = "10"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxScores"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer5"]
+layout_mode = 2
+text = "LUCAS"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer5"]
+layout_mode = 2
+text = "10"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxScores"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer6"]
+layout_mode = 2
+text = "LUCAS"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer6"]
+layout_mode = 2
+text = "10"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxScores"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer7"]
+layout_mode = 2
+text = "LUCAS"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer7"]
+layout_mode = 2
+text = "10"
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxScores"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer8"]
+layout_mode = 2
+text = "LUCAS"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer8"]
+layout_mode = 2
+text = "10"
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxScores"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer9"]
+layout_mode = 2
+text = "LUCAS"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer9"]
+layout_mode = 2
+text = "10"
+
+[node name="HBoxContainer10" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxScores"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer10"]
+layout_mode = 2
+text = "LUCAS"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/VBoxScores/HBoxContainer10"]
+layout_mode = 2
+text = "100"
+
 [node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(350, 75)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -127.0
-offset_top = -90.0
-offset_right = 127.0
-offset_bottom = -27.0
+offset_left = -175.0
+offset_top = -83.0
+offset_right = 175.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 48
