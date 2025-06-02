@@ -13,7 +13,7 @@ func _input(event: InputEvent) -> void:
 		start_scene_transition("res://game/level_1.tscn")
 
 func start_scene_transition(target_scene_path: String) -> void:
-
+	color_rect.show()
 	# Cria o tween para fade out (ficar preto)
 	var t := create_tween()
 	t.tween_property(color_rect, "modulate:a", 1.0, 1.0) \

@@ -343,6 +343,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="DeathScreen" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("22_78mi1")
 
 [node name="Panel" type="Panel" parent="DeathScreen"]

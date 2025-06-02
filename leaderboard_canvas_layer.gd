@@ -7,22 +7,7 @@ func _ready() -> void:
 	button.pressed.connect(func()->void:
 		Leaderboard.score = 0
 		get_tree().reload_current_scene())
-	pass
-	 #Testes com o leaderboard:
-	#Leaderboard.reset_highscore()
-	#Leaderboard.add_score("Arthur", 1200)
-	#Leaderboard.add_score("Lucas", 1600)
-	#Leaderboard.add_score("Marcela", 1400)
-	#Leaderboard.add_score("Arthur", 120)
-	#Leaderboard.add_score("Lucas", 160)
-	#Leaderboard.add_score("Marcela", 140)
-	#Leaderboard.add_score("Arthur", 12)
-	#Leaderboard.add_score("Lucas", 6)
-	#Leaderboard.add_score("Marcela", 4)
-	#Leaderboard.add_score("Arthurio", 12)
-	#Leaderboard.add_score("Lucas", 1)
-	#Leaderboard.add_score("Marcela", 1)
-	#update_leaderboard_display(Leaderboard.leaderboard)
+
 
 # Atualiza a exibição do leaderboard na interface
 func update_leaderboard_display(leaderboard: Array) -> void:
