@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c5axlivn42ft1"
+path="res://.godot/imported/inimigo shot.mp3-3a63bd58c9c8df8112e67892ef770871.mp3str"
+
+[deps]
+
+source_file="res://sfx/inimigo shot.mp3"
+dest_files=["res://.godot/imported/inimigo shot.mp3-3a63bd58c9c8df8112e67892ef770871.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

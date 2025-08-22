@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b86lavvk2fasm"]
+[gd_scene load_steps=7 format=3 uid="uid://b86lavvk2fasm"]
 
 [ext_resource type="Script" uid="uid://djjt4dsaq74ld" path="res://UI/main_menu.gd" id="1_d8nwk"]
 [ext_resource type="Texture2D" uid="uid://bf3dsv855j0ay" path="res://UI/banana menu.png" id="1_p8ccj"]
 [ext_resource type="Script" uid="uid://cj51fow78ns5j" path="res://UI/node_2d.gd" id="2_tk8dj"]
+[ext_resource type="AudioStream" uid="uid://ct621o4xim3li" path="res://musics/menu_music.mp3" id="4_4cwpn"]
+[ext_resource type="PackedScene" uid="uid://lojyxe4qtg03" path="res://particles/flying_particles.tscn" id="5_f40uw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d8nwk"]
 font_size = 48
@@ -47,3 +49,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="MenuSong" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4cwpn")
+volume_db = -17.5
+autoplay = true
+
+[node name="FlyingParticles" parent="." instance=ExtResource("5_f40uw")]
+position = Vector2(931, 533)
+amount = 200
+trail_lifetime = 10.0

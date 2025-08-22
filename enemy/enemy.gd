@@ -3,6 +3,11 @@ class_name Enemy extends CharacterBody2D
 @onready var animated_enemy_sprite_2d: AnimatedSprite2D = %AnimatedEnemySprite2D
 @onready var weapon_pivot: Node2D = %WeaponPivot
 @onready var enemy_weapon: Sprite2D = %EnemyWeapon
+@onready var timer: Timer = %Timer
+@onready var mat: ShaderMaterial = animated_enemy_sprite_2d.material
+@onready var hit_sound: AudioStreamPlayer2D = %HitSound
+@onready var headshot_sound: AudioStreamPlayer2D = %HeadshotSound
+
 
 var chase_distance_min = 350
 var chase_distance_max = 500
@@ -12,7 +17,7 @@ var score_points_value : int = 10
 var player: Player = null # Configuramos a referência ao player no script do spawner
 var speed: int = 250
 
-enum States {CHASE, DIE, SHOOT}
+enum States {IDLE, CHASE, DIE, SHOOT}
 var current_state: States = States.CHASE: set = set_state
 
 func set_state(new_state: States) -> void:
@@ -20,12 +25,25 @@ func set_state(new_state: States) -> void:
 	current_state = new_state
 
 	match current_state:
+		States.IDLE:
+			animated_enemy_sprite_2d.play("idle")
 		States.CHASE:
 			animated_enemy_sprite_2d.play("chase")
 		States.DIE:
 			animated_enemy_sprite_2d.play("die")
 		States.SHOOT:
+			%ShotSound.play()
 			animated_enemy_sprite_2d.play("shoot")
+
+func _ready() -> void:
+	Signals.player_died.connect(stop_shooting)
+	
+	timer.timeout.connect(func() -> void:
+		current_state = States.SHOOT)
+	var stream : AudioStreamRandomizer = $MonkeySound.stream 
+	var length := stream.get_stream(0).get_length()
+	
+	$MonkeySound.play(randf_range(0.0, length))
 
 func _physics_process(delta: float) -> void:
 	if player == null:
@@ -48,8 +66,8 @@ func _physics_process(delta: float) -> void:
 				current_state = States.CHASE
 			velocity = speed * direction_to_player 
 		elif distance_to_player < chase_distance_min:
-			if current_state != States.SHOOT:
-				current_state = States.SHOOT
+			if current_state != States.IDLE:
+				current_state = States.IDLE
 			velocity = Vector2.ZERO
 		move_and_slide()
 
@@ -72,10 +90,20 @@ func _process(_delta: float) -> void:
 		
 		
 func take_damage(amount: int):
+	if current_state == States.DIE:
+		return
+	if player != null:
+		var p_pos:= player.global_position
+		var part_dir := p_pos.direction_to(global_position)
+		%Blood.process_material.set("direction", part_dir)
+		%Blood.restart()
+	hit_sound.play()
 	health -= amount
-	if health <= 0 and current_state != States.DIE:
+	if health <= 0:
 		current_state = States.DIE
 		# Lógica da morte:
+		$MonkeyScream.play()
+		$MonkeySound.stop()
 		$CollisionShape2D.set_deferred("disabled", true)
 		if enemy_weapon.has_node("Timer"):
 			enemy_weapon.get_node("Timer").stop()
@@ -83,4 +111,18 @@ func take_damage(amount: int):
 		await get_tree().create_timer(2).timeout
 		queue_free()
 
+func stop_shooting() -> void:
+	timer.stop()
+
+func flash_white():
+	if current_state != States.DIE:
+		mat.set("shader_parameter/flash_strength", 1.0)
+		var t := create_tween()
+		t.tween_property(mat, "shader_parameter/flash_strength", 0.0, 0.1)
 	
+func head_shot()-> void:
+	if current_state != States.DIE:
+		headshot_sound.play()
+		mat.set("shader_parameter/red_strength", 1.0)
+		var t := create_tween()
+		t.tween_property(mat, "shader_parameter/red_strength", 0.0, 0.15)

@@ -1,9 +1,8 @@
-[gd_scene load_steps=37 format=3 uid="uid://cqn7bb3fkjxas"]
+[gd_scene load_steps=49 format=3 uid="uid://cqn7bb3fkjxas"]
 
 [ext_resource type="Script" uid="uid://bwqu04qhfyu0e" path="res://game/level_1.gd" id="1_1nuos"]
 [ext_resource type="PackedScene" uid="uid://crvp28mw5q0mx" path="res://player/player.tscn" id="1_oo0i2"]
 [ext_resource type="Script" uid="uid://cfvcy5oey458w" path="res://enemy/enemy_spawner.gd" id="3_m8qid"]
-[ext_resource type="Texture2D" uid="uid://d01tn307puiy6" path="res://game/Cenário/cenario banana inteiro.png" id="4_g0ys1"]
 [ext_resource type="Texture2D" uid="uid://cr5heusugi25y" path="res://game/Cenário/cenario banana 1.png" id="5_sjlj3"]
 [ext_resource type="Texture2D" uid="uid://rfys581sqcq4" path="res://game/Cenário/cacto ajustado 1.png" id="7_34xli"]
 [ext_resource type="Texture2D" uid="uid://5hvsnq0f6yab" path="res://game/Cenário/cacto ajustado 2.png" id="8_1b54y"]
@@ -16,17 +15,17 @@
 [ext_resource type="Texture2D" uid="uid://dx0gt1hpa8an" path="res://game/Cenário/mato ajustado 2.png" id="15_a4bdo"]
 [ext_resource type="Texture2D" uid="uid://566wtaxim1tt" path="res://game/Cenário/sombra pedra ajustada 2.png" id="15_hekkb"]
 [ext_resource type="Texture2D" uid="uid://bi11xcnmyou1f" path="res://game/Cenário/mato ajustado.png" id="16_6h1kn"]
+[ext_resource type="PackedScene" uid="uid://c3cfju43xt1oo" path="res://box/destructible_box.tscn" id="17_1nuos"]
 [ext_resource type="PackedScene" uid="uid://b7ouejtd41g1o" path="res://enemy/enemy.tscn" id="17_6h1kn"]
-[ext_resource type="Script" uid="uid://jnfgddbpxijm" path="res://game/destructible_box.gd" id="18_hekkb"]
-[ext_resource type="Texture2D" uid="uid://c0to13eqrjco2" path="res://game/Cenário/caixa para quebrar.png" id="19_btc8a"]
 [ext_resource type="Texture2D" uid="uid://df3hms0s4m5d4" path="res://game/Tela/coração ajustado.png" id="19_eg035"]
 [ext_resource type="Script" uid="uid://bo8ri8uq6mhhp" path="res://UI/score.gd" id="19_lb0el"]
 [ext_resource type="Script" uid="uid://bcrdy8kbhywu2" path="res://UI/health.gd" id="20_78mi1"]
 [ext_resource type="Script" uid="uid://bh4gnjv6us8k2" path="res://game/death_screen.gd" id="22_78mi1"]
 [ext_resource type="PackedScene" uid="uid://c7urnpv78pn0i" path="res://UI/leaderboard_canvas_layer.tscn" id="23_gtaf5"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_eg035"]
-size = Vector2(78, 82)
+[ext_resource type="AudioStream" uid="uid://7hhxlsgefu12" path="res://sfx/defeat_not_so_loud.wav" id="23_nsvtq"]
+[ext_resource type="AudioStream" uid="uid://8tdnin03a8j3" path="res://sfx/smooth-cold-wind-looped-135538.mp3" id="25_nsvtq"]
+[ext_resource type="AudioStream" uid="uid://cryhhtoiuk0sx" path="res://musics/game_music.mp3" id="25_wyhm8"]
+[ext_resource type="PackedScene" uid="uid://lojyxe4qtg03" path="res://particles/flying_particles.tscn" id="26_nsvtq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a4bdo"]
 size = Vector2(390, 321)
@@ -35,7 +34,7 @@ size = Vector2(390, 321)
 size = Vector2(201, 273.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btc8a"]
-size = Vector2(201, 175.75)
+size = Vector2(313.5, 175.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lb0el"]
 size = Vector2(209.5, 453.938)
@@ -81,6 +80,61 @@ shadow_size = 30
 font_size = 180
 font_color = Color(0.871711, 0.436627, 0.22488, 1)
 
+[sub_resource type="Gradient" id="Gradient_wyhm8"]
+offsets = PackedFloat32Array(0, 0.411972, 0.630282, 0.989437)
+colors = PackedColorArray(1, 1, 1, 0, 0.986307, 0.860261, 0.635635, 1, 0.991913, 0.911275, 0.769791, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nsvtq"]
+gradient = SubResource("Gradient_wyhm8")
+width = 1
+height = 32
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_1nuos"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wyhm8"]
+gradient = SubResource("Gradient_1nuos")
+
+[sub_resource type="Gradient" id="Gradient_nsvtq"]
+offsets = PackedFloat32Array(0, 0.19708, 0.773723, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h80cb"]
+gradient = SubResource("Gradient_nsvtq")
+
+[sub_resource type="Curve" id="Curve_1nuos"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wahby"]
+curve = SubResource("Curve_1nuos")
+
+[sub_resource type="Curve" id="Curve_34hs4"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, -15.8845), 0.0, 0.0, 0, 0, Vector2(0.0676692, 32.6531), 0.0, 0.0, 0, 0, Vector2(0.135338, -12.2449), 0.0, 0.0, 0, 0, Vector2(0.206767, 28.5714), 0.0, 0.0, 0, 0, Vector2(0.293233, -20.4081), 0.0, 0.0, 0, 0, Vector2(0.394799, 31.0469), 0.0, 0.0, 0, 0, Vector2(0.491726, -18.231), 0.0, 0.0, 0, 0, Vector2(0.58156, 35.7401), 0.0, 0.0, 0, 0, Vector2(0.690307, -32.3105), 0.0, 0.0, 0, 0, Vector2(0.794326, 26.3538), -86.313, -86.313, 0, 0, Vector2(0.879433, -20.5776), 0.0, 0.0, 0, 0, Vector2(0.973684, 28.5714), 0.0, 0.0, 0, 0]
+point_count = 12
+
+[sub_resource type="CurveTexture" id="CurveTexture_yxyey"]
+curve = SubResource("Curve_34hs4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1nuos"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(200, 700, 1)
+gravity = Vector3(150, 10, 0)
+tangential_accel_min = 6.0
+tangential_accel_max = 6.0
+tangential_accel_curve = SubResource("CurveTexture_yxyey")
+damping_min = 75.922
+damping_max = 100.0
+damping_curve = SubResource("CurveTexture_wahby")
+scale_min = 2.2
+scale_max = 3.3
+color_ramp = SubResource("GradientTexture1D_h80cb")
+color_initial_ramp = SubResource("GradientTexture1D_wyhm8")
+
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_1nuos")
@@ -100,20 +154,39 @@ position = Vector2(1393, 231)
 unique_name_in_owner = true
 position = Vector2(985, 490)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(1.3, 1.3)
-limit_left = 0
-limit_top = 0
-limit_right = 1920
-limit_bottom = 1080
-limit_smoothed = true
-
-[node name="CenarioBananaInteiro" type="Sprite2D" parent="."]
-position = Vector2(2971, 541)
-texture = ExtResource("4_g0ys1")
-
 [node name="AssetsCenário" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="CenarioBananaAtras" type="Sprite2D" parent="AssetsCenário"]
+z_index = -100
+position = Vector2(-107, 0)
+texture = ExtResource("5_sjlj3")
+centered = false
+
+[node name="CenarioBananaAtras3" type="Sprite2D" parent="AssetsCenário"]
+z_index = -100
+position = Vector2(51, 0)
+texture = ExtResource("5_sjlj3")
+centered = false
+
+[node name="CenarioBananaAtras4" type="Sprite2D" parent="AssetsCenário"]
+z_index = -101
+position = Vector2(0, 54)
+texture = ExtResource("5_sjlj3")
+centered = false
+
+[node name="CenarioBananaAtras6" type="Sprite2D" parent="AssetsCenário"]
+z_index = -102
+position = Vector2(-87, -27)
+scale = Vector2(1.07575, 1.07575)
+texture = ExtResource("5_sjlj3")
+centered = false
+
+[node name="CenarioBananaAtras5" type="Sprite2D" parent="AssetsCenário"]
+z_index = -100
+position = Vector2(0, -24)
+texture = ExtResource("5_sjlj3")
+centered = false
 
 [node name="CenarioBanana1" type="Sprite2D" parent="AssetsCenário"]
 z_index = -100
@@ -121,10 +194,20 @@ texture = ExtResource("5_sjlj3")
 centered = false
 
 [node name="PedraAjustada1" type="Sprite2D" parent="AssetsCenário"]
-position = Vector2(106, 954)
+position = Vector2(110, 1004)
 texture = ExtResource("12_4ocg2")
 
 [node name="SombraPedraAjustada1" type="Sprite2D" parent="AssetsCenário/PedraAjustada1"]
+modulate = Color(1, 1, 1, 0.588235)
+show_behind_parent = true
+position = Vector2(-3, 18)
+texture = ExtResource("13_a4bdo")
+
+[node name="PedraAjustada3" type="Sprite2D" parent="AssetsCenário"]
+position = Vector2(1910, 465)
+texture = ExtResource("12_4ocg2")
+
+[node name="SombraPedraAjustada1" type="Sprite2D" parent="AssetsCenário/PedraAjustada3"]
 modulate = Color(1, 1, 1, 0.588235)
 show_behind_parent = true
 position = Vector2(-3, 18)
@@ -152,8 +235,8 @@ texture = ExtResource("8_wcxg3")
 
 [node name="SkewTween" type="Node" parent="AssetsCenário/CactoAjustado1"]
 script = ExtResource("9_wcxg3")
-amount_to_skew = 4.0
-tween_duration = 2.4
+amount_to_skew = 8.0
+tween_duration = 3.0
 metadata/_custom_type_script = "uid://buy4hs1hlx1lo"
 
 [node name="CactoAjustado2" type="Sprite2D" parent="AssetsCenário"]
@@ -166,11 +249,10 @@ modulate = Color(1, 1, 1, 0.356863)
 position = Vector2(-12, 26)
 texture = ExtResource("11_k3ob8")
 
-[node name="SkewTween" type="Node" parent="AssetsCenário/CactoAjustado2" node_paths=PackedStringArray("node_to_tween")]
+[node name="SkewTween" type="Node" parent="AssetsCenário/CactoAjustado2"]
 script = ExtResource("9_wcxg3")
-node_to_tween = NodePath("..")
-amount_to_skew = 5.0
-tween_duration = 2.0
+amount_to_skew = 10.0
+tween_duration = 4.0
 
 [node name="MatoAjustado2" type="Sprite2D" parent="AssetsCenário"]
 position = Vector2(476, 539)
@@ -179,8 +261,8 @@ offset = Vector2(-1, -14)
 
 [node name="SkewTween" type="Node" parent="AssetsCenário/MatoAjustado2"]
 script = ExtResource("9_wcxg3")
-amount_to_skew = 16.0
-tween_duration = 1.85
+amount_to_skew = 30.0
+tween_duration = 1.75
 metadata/_custom_type_script = "uid://buy4hs1hlx1lo"
 
 [node name="MatoAjustado" type="Sprite2D" parent="AssetsCenário"]
@@ -190,8 +272,8 @@ offset = Vector2(-1, -33)
 
 [node name="SkewTween" type="Node" parent="AssetsCenário/MatoAjustado"]
 script = ExtResource("9_wcxg3")
-amount_to_skew = 7.0
-tween_duration = 2.25
+amount_to_skew = 25.0
+tween_duration = 2.2
 metadata/_custom_type_script = "uid://buy4hs1hlx1lo"
 
 [node name="MatoAjustado3" type="Sprite2D" parent="AssetsCenário"]
@@ -201,8 +283,8 @@ offset = Vector2(-1, -14)
 
 [node name="SkewTween" type="Node" parent="AssetsCenário/MatoAjustado3"]
 script = ExtResource("9_wcxg3")
-amount_to_skew = 16.0
-tween_duration = 1.75
+amount_to_skew = 25.0
+tween_duration = 2.0
 metadata/_custom_type_script = "uid://buy4hs1hlx1lo"
 
 [node name="MatoAjustado4" type="Sprite2D" parent="AssetsCenário"]
@@ -213,64 +295,27 @@ flip_h = true
 
 [node name="SkewTween" type="Node" parent="AssetsCenário/MatoAjustado4"]
 script = ExtResource("9_wcxg3")
-amount_to_skew = 11.0
-tween_duration = 1.9
+amount_to_skew = 20.0
+tween_duration = 1.8
 metadata/_custom_type_script = "uid://buy4hs1hlx1lo"
 
-[node name="DestructibleBox" type="CharacterBody2D" parent="AssetsCenário"]
-position = Vector2(466, 264)
-script = ExtResource("18_hekkb")
+[node name="DestructibleBox" parent="AssetsCenário" instance=ExtResource("17_1nuos")]
+position = Vector2(510, 202)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AssetsCenário/DestructibleBox"]
-position = Vector2(-1, 3)
-shape = SubResource("RectangleShape2D_eg035")
+[node name="DestructibleBox2" parent="AssetsCenário" instance=ExtResource("17_1nuos")]
+position = Vector2(274, 861)
 
-[node name="Sprite2D" type="Sprite2D" parent="AssetsCenário/DestructibleBox"]
-texture = ExtResource("19_btc8a")
+[node name="DestructibleBox3" parent="AssetsCenário" instance=ExtResource("17_1nuos")]
+position = Vector2(1791, 681)
 
-[node name="DestructibleBox2" type="CharacterBody2D" parent="AssetsCenário"]
-position = Vector2(1841, 660)
-script = ExtResource("18_hekkb")
+[node name="DestructibleBox4" parent="AssetsCenário" instance=ExtResource("17_1nuos")]
+position = Vector2(1085, 207)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AssetsCenário/DestructibleBox2"]
-position = Vector2(-1, 3)
-shape = SubResource("RectangleShape2D_eg035")
+[node name="DestructibleBox5" parent="AssetsCenário" instance=ExtResource("17_1nuos")]
+position = Vector2(268, 381)
 
-[node name="Sprite2D" type="Sprite2D" parent="AssetsCenário/DestructibleBox2"]
-texture = ExtResource("19_btc8a")
-
-[node name="DestructibleBox3" type="CharacterBody2D" parent="AssetsCenário"]
-position = Vector2(1131, 135)
-script = ExtResource("18_hekkb")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AssetsCenário/DestructibleBox3"]
-position = Vector2(-1, 3)
-shape = SubResource("RectangleShape2D_eg035")
-
-[node name="Sprite2D" type="Sprite2D" parent="AssetsCenário/DestructibleBox3"]
-texture = ExtResource("19_btc8a")
-
-[node name="DestructibleBox4" type="CharacterBody2D" parent="AssetsCenário"]
-position = Vector2(285, 627)
-script = ExtResource("18_hekkb")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AssetsCenário/DestructibleBox4"]
-position = Vector2(-1, 3)
-shape = SubResource("RectangleShape2D_eg035")
-
-[node name="Sprite2D" type="Sprite2D" parent="AssetsCenário/DestructibleBox4"]
-texture = ExtResource("19_btc8a")
-
-[node name="DestructibleBox5" type="CharacterBody2D" parent="AssetsCenário"]
-position = Vector2(1747, 717)
-script = ExtResource("18_hekkb")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AssetsCenário/DestructibleBox5"]
-position = Vector2(-1, 3)
-shape = SubResource("RectangleShape2D_eg035")
-
-[node name="Sprite2D" type="Sprite2D" parent="AssetsCenário/DestructibleBox5"]
-texture = ExtResource("19_btc8a")
+[node name="DestructibleBox6" parent="AssetsCenário" instance=ExtResource("17_1nuos")]
+position = Vector2(1556, 423)
 
 [node name="PlayerLimits" type="StaticBody2D" parent="."]
 
@@ -283,7 +328,7 @@ position = Vector2(1688, 168)
 shape = SubResource("RectangleShape2D_hekkb")
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="PlayerLimits"]
-position = Vector2(1751, 409)
+position = Vector2(1807.25, 409)
 shape = SubResource("RectangleShape2D_btc8a")
 
 [node name="CollisionShape2D8" type="CollisionShape2D" parent="PlayerLimits"]
@@ -409,5 +454,34 @@ text = "Submit Score"
 
 [node name="LeaderboardCanvasLayer" parent="DeathScreen" instance=ExtResource("23_gtaf5")]
 visible = false
+
+[node name="DefeatSound" type="AudioStreamPlayer" parent="DeathScreen"]
+stream = ExtResource("23_nsvtq")
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_wyhm8")
+volume_db = -13.0
+autoplay = true
+
+[node name="WindLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_nsvtq")
+volume_db = -7.0
+pitch_scale = 0.85
+autoplay = true
+
+[node name="WindParticle" type="GPUParticles2D" parent="."]
+position = Vector2(442, 721)
+amount = 29
+texture = SubResource("GradientTexture2D_nsvtq")
+lifetime = 5.0
+preprocess = 2.0
+randomness = 1.0
+visibility_rect = Rect2(-100, -100, 1500, 500)
+trail_enabled = true
+trail_lifetime = 0.8
+process_material = SubResource("ParticleProcessMaterial_1nuos")
+
+[node name="FlyingParticles" parent="." instance=ExtResource("26_nsvtq")]
+position = Vector2(875, 552)
 
 [connection signal="pressed" from="DeathScreen/Panel/Button" to="DeathScreen" method="_on_button_pressed"]

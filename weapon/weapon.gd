@@ -7,8 +7,10 @@ class_name Weapon extends Node2D
 
 @export_range(100.0, 2000.0, 1.0) var max_range := 200.0
 @export_range(100.0, 3000.0, 1.0) var max_bullet_speed := 1500.0
+
 @onready var marker_2d: Marker2D = $Marker2D
 
+signal shot_fired # conectado na weapon pivot do player e na camera
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
@@ -16,6 +18,7 @@ func _physics_process(_delta: float) -> void:
 
 # Faz a arma atirar uma vez, essa função é sobrescrita quando precisa de um comportamente diferente
 func shoot() -> void:
+	shot_fired.emit()
 	var bullet: Bullet = bullet_scene.instantiate() 
 	
 

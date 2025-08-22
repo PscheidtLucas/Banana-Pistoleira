@@ -5,6 +5,7 @@ extends CanvasLayer
 
 func _ready() -> void:
 	button.pressed.connect(func()->void:
+		PistolReady.play_pistol_ready_sound()
 		Leaderboard.score = 0
 		get_tree().reload_current_scene())
 

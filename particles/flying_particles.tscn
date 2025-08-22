@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://lojyxe4qtg03"]
+
+[ext_resource type="Texture2D" uid="uid://dhm4duheyw3jb" path="res://shadow/simple-white-circle-and-drop-shadow-png.webp" id="1_o6fjl"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wahby"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_yxyey"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0977444, 1), 0.0, 0.0, 0, 0, Vector2(0.176692, 0), 0.0, 0.0, 0, 0, Vector2(0.296992, 1), 0.0, 0.0, 0, 0, Vector2(0.390977, 0), 0.0, 0.0, 0, 0, Vector2(0.518797, 1), 0.0, 0.0, 0, 0, Vector2(0.597744, 0.0408163), 0.0, 0.0, 0, 0, Vector2(0.744361, 1), 0.0, 0.0, 0, 0, Vector2(0.838346, 0), 0.0, 0.0, 0, 0, Vector2(0.913534, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 11
+
+[sub_resource type="CurveTexture" id="CurveTexture_8tqhx"]
+curve = SubResource("Curve_yxyey")
+
+[sub_resource type="Curve" id="Curve_vs6rf"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, -48.9796), 0.0, 0.0, 0, 0, Vector2(0.093985, 48.9796), 0.0, 0.0, 0, 0, Vector2(0.176692, -32.653), 0.0, 0.0, 0, 0, Vector2(0.240602, 53.0612), 0.0, 0.0, 0, 0, Vector2(0.330827, -48.9796), 0.0, 0.0, 0, 0, Vector2(0.409774, 61.2245), 0.0, 0.0, 0, 0, Vector2(0.492481, -48.9796), 0.0, 0.0, 0, 0, Vector2(0.567669, 53.0612), 0.0, 0.0, 0, 0, Vector2(0.631579, -32.653), 0.0, 0.0, 0, 0, Vector2(0.714286, 57.1429), 0.0, 0.0, 0, 0, Vector2(0.774436, -36.7347), 0.0, 0.0, 0, 0, Vector2(0.838346, 48.9796), 0.0, 0.0, 0, 0, Vector2(0.902256, -36.7347), 0.0, 0.0, 0, 0, Vector2(0.947368, 44.898), 0.0, 0.0, 0, 0, Vector2(1, -36.7347), 0.0, 0.0, 0, 0]
+point_count = 15
+
+[sub_resource type="CurveTexture" id="CurveTexture_5eelp"]
+curve = SubResource("Curve_vs6rf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_58kq5"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1050, 550, 1)
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -3.0
+tangential_accel_max = 3.0
+tangential_accel_curve = SubResource("CurveTexture_5eelp")
+scale_min = 0.02
+scale_max = 0.03
+color = Color(0.753531, 0.645787, 0.40028, 1)
+alpha_curve = SubResource("CurveTexture_8tqhx")
+
+[node name="FlyingParticles" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_wahby")
+amount = 60
+texture = ExtResource("1_o6fjl")
+lifetime = 5.0
+preprocess = 10.0
+speed_scale = 0.5
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_58kq5")

@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Leaderboard="*res://UI/leaderboard.gd"
+Signals="*res://globals/signals.gd"
+PistolReady="*res://globals/pistol_ready.gd"
 
 [display]
 
@@ -27,6 +29,12 @@ window/size/viewport_height=1080
 window/size/mode=3
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
+mouse_cursor/custom_image="uid://uxufwrijh1l3"
+mouse_cursor/custom_image_hotspot=Vector2(16, 5)
+
+[global_group]
+
+headshot=""
 
 [gui]
 
@@ -79,3 +87,7 @@ special={
 
 common/physics_jitter_fix=0.0
 common/physics_interpolation=true
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

@@ -13,6 +13,9 @@ var direction := Vector2.ZERO
 var health:int = 5
 signal player_died
 signal update_health (health)
+# screen shake signals:
+signal took_damage
+signal hat_back
 
 # Declaramos um enum, ele funciona como um atalho legível para salvar as constantes resposáveis
 # por controlar o estado do nosso personagem de forma centralizada em um único lugar:
@@ -30,19 +33,29 @@ var chapeu_original_pos : Vector2 #variável da posição inicial do chapéu
 @onready var dash_cooldown_timer: Timer = %DashCooldownTimer
 @onready var body_animated_sprite: AnimatedSprite2D = %BodyAnimatedSprite
 @onready var chapeu_area: Area2D = %ChapeuArea
+@onready var damage_sound: AudioStreamPlayer2D = %DamageSound
 
 # Função que é chamada toda vez que o current_state é alterado, 
 # aqui é onde se controla as animações através de um match
 func set_state(new_state: States) -> void:
 	var previous_state: States = current_state
+	match previous_state:
+		States.RUNNING:
+			$Footsteps.stop()
+		States.DYING:
+			return
+	
 	current_state = new_state
 
 	match current_state:
 		States.IDLE:
 			body_animated_sprite.play("idle")
 		States.RUNNING:
+			if $Footsteps.playing == false:
+				$Footsteps.play()
 			body_animated_sprite.play("run")
 		States.ROLLING:
+			$Rolling.play()
 			body_animated_sprite.play("roll")
 			if hat_current_state == HatStates.SHOW_IDLE:
 				%ChapeuArea.hide()
@@ -60,7 +73,6 @@ func set_hat_state(new_state: HatStates) -> void:
 		chapeu_area.can_damage = true
 		%ChapeuSprite.play("voando")
 
-			
 
 func _ready() -> void:
 	player_died.connect(_on_player_died)
@@ -103,14 +115,21 @@ func _physics_process(delta: float) -> void:
 
 	# Lógica do lançamento do chapéu:
 	if hat_current_state == HatStates.THROW:
-		chapeu_area.global_position = chapeu_area.global_position.move_toward(get_global_mouse_position(), 400*delta)
+		chapeu_area.global_position = chapeu_area.global_position.move_toward(get_global_mouse_position(), 550*delta)
 	elif hat_current_state == HatStates.COMING_BACK:
 		chapeu_area.global_position = chapeu_area.global_position.move_toward(global_position, 400*delta)
-		
-		if chapeu_area.global_position.distance_to(global_position) <= 50:
+		$ChapeuArea/FlyingHat.pitch_scale = 0.9
+		#chapeu chegou
+		if chapeu_area.global_position.distance_to(global_position) <= 50 and hat_current_state != HatStates.SHOW_IDLE:
+			chapeu_area.top_level = false
 			hat_current_state = HatStates.SHOW_IDLE
 			chapeu_area.global_position = global_position
 			chapeu_area.position =  chapeu_original_pos 
+			if $ChapeuArea/FlyingHat.playing == true: 
+				$ChapeuArea/FlyingHat.pitch_scale = 1.2
+				$HatBack.play()
+				hat_back.emit()
+				$ChapeuArea/FlyingHat.stop()
 
 	
 	# Lógica para trocar de State:
@@ -118,7 +137,8 @@ func _physics_process(delta: float) -> void:
 		if velocity.length() <= 5:
 			set_state(States.IDLE)
 		else:
-			set_state(States.RUNNING)
+			if current_state != States.RUNNING:
+				set_state(States.RUNNING)
 
 
 # Controla a rolagem do personagem, deixando ele mais rápido por 0.2 segundos, e, depois, volta a velocidade anterior
@@ -142,12 +162,20 @@ func _input(event: InputEvent) -> void:
 			throw_hat()
 		
 func throw_hat():
+	$ChapeuArea/FlyingHat.play()
+	var hat_position = chapeu_area.global_position
+	chapeu_area.top_level = true
+	chapeu_area.global_position = hat_position
 	if hat_current_state == HatStates.SHOW_IDLE:
 		hat_current_state = HatStates.THROW
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(2.3).timeout
 		hat_current_state = HatStates.COMING_BACK
 	
 func take_damage(amount: int):
+	if current_state == States.ROLLING:
+		return
+	damage_sound.play()
+	took_damage.emit()
 	health -= amount
 	update_health.emit(health)
 	if health <= 0 and current_state != States.DYING:
@@ -157,6 +185,8 @@ func take_damage(amount: int):
 
 # Lógica para quando o player morre ele parar de atirar, andar e esconder o chapeu
 func _on_player_died():
+	Signals.player_died.emit()
+	$DeadBanana.play()
 	set_physics_process(false)
 	set_process(false)
 	$CollisionShape2D.set_deferred("disabled", true)

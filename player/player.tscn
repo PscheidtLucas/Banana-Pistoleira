@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://crvp28mw5q0mx"]
+[gd_scene load_steps=52 format=3 uid="uid://crvp28mw5q0mx"]
 
 [ext_resource type="Script" uid="uid://0mv3fd0jdj5q" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="Texture2D" uid="uid://fnmb7nfxfn1a" path="res://player/banana/idle/idle 1.png" id="2_g4c7l"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://chts3hl1f6n8b" path="res://player/banana/Walk/andar 5.png" id="19_rptt4"]
 [ext_resource type="Texture2D" uid="uid://ugui64iyevxo" path="res://player/banana/Walk/andar 6.png" id="20_r7pn3"]
 [ext_resource type="Texture2D" uid="uid://4n0kjuyn2sph" path="res://player/banana/Braço e chapéu/Banana braço da arma.png" id="21_r7pn3"]
+[ext_resource type="Script" uid="uid://d11omchm3dwqa" path="res://weapon/player_weapon.gd" id="22_55jnj"]
+[ext_resource type="Texture2D" uid="uid://b3dbarwgkeq4o" path="res://particles/muzzle_02.png" id="22_jd2rm"]
 [ext_resource type="Script" uid="uid://ovmgkw7fqura" path="res://player/chapeu_area.gd" id="22_s7qer"]
 [ext_resource type="Texture2D" uid="uid://bx7gq6yop0ywd" path="res://player/banana/Braço e chapéu/chapéu sem riscos.png" id="23_r7pn3"]
 [ext_resource type="Texture2D" uid="uid://ctsguev0lhthh" path="res://weapon/Chapéu/Banana chapéu voando 2.png" id="24_rptt4"]
@@ -29,6 +31,17 @@
 [ext_resource type="Texture2D" uid="uid://qewb0mxugxwk" path="res://weapon/Chapéu/Banana chapéu voando 4.png" id="26_b8hi5"]
 [ext_resource type="Texture2D" uid="uid://w4w3i2hk56as" path="res://weapon/Chapéu/Banana chapéu voando 5.png" id="27_2uvqg"]
 [ext_resource type="Texture2D" uid="uid://dfqsei8cs72rv" path="res://weapon/Chapéu/Banana chapéu voando 6.png" id="28_1s1yo"]
+[ext_resource type="AudioStream" uid="uid://dnd783w0388kt" path="res://sfx/pistol-shot-233473.mp3" id="30_b8hi5"]
+[ext_resource type="AudioStream" uid="uid://xl6f5jbeufj2" path="res://sfx/footsteps_player.wav" id="31_2uvqg"]
+[ext_resource type="AudioStream" uid="uid://ci2wf610c0cgp" path="res://sfx/flying_hat.wav" id="31_5ejfk"]
+[ext_resource type="AudioStream" uid="uid://3n3wbcsrkhh4" path="res://sfx/roll_sound.wav" id="32_1s1yo"]
+[ext_resource type="AudioStream" uid="uid://dectq0fkehb66" path="res://sfx/dead_banan_final.wav" id="35_q28gw"]
+[ext_resource type="Script" uid="uid://ct2b7iowcpbt" path="res://game/camera_2d.gd" id="36_ge24q"]
+[ext_resource type="AudioStream" uid="uid://8em3n2es44h1" path="res://sfx/chapeu_back_sound.wav" id="37_pnw6m"]
+[ext_resource type="Texture2D" uid="uid://dhm4duheyw3jb" path="res://shadow/simple-white-circle-and-drop-shadow-png.webp" id="38_1so5t"]
+[ext_resource type="AudioStream" uid="uid://bf0socgflb2jg" path="res://sfx/dano1.wav" id="40_art4l"]
+[ext_resource type="AudioStream" uid="uid://dvpleeaifg1qf" path="res://sfx/dano2.wav" id="41_fjxoa"]
+[ext_resource type="AudioStream" uid="uid://dhwv3lds2s6hq" path="res://sfx/dano3.wav" id="42_gswnw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kqu6x"]
 animations = [{
@@ -44,7 +57,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"die",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -61,7 +74,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 8.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -81,7 +94,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"roll",
-"speed": 14.0
+"speed": 12.0
 }, {
 "frames": [],
 "loop": true,
@@ -109,12 +122,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 12.0
+"speed": 9.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bjvpn"]
 radius = 23.0
 height = 86.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2uvqg"]
+random_pitch = 1.15
+streams_count = 1
+stream_0/stream = ExtResource("30_b8hi5")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5ejfk"]
 animations = [{
@@ -152,6 +170,28 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s7qer"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jd2rm"]
+random_pitch = 1.15
+streams_count = 1
+stream_0/stream = ExtResource("31_5ejfk")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1s1yo"]
+random_pitch = 1.15
+streams_count = 1
+stream_0/stream = ExtResource("32_1s1yo")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ge24q"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("35_q28gw")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xcnuv"]
+random_pitch = 1.1
+streams_count = 3
+stream_0/stream = ExtResource("40_art4l")
+stream_1/stream = ExtResource("41_fjxoa")
+stream_2/stream = ExtResource("42_gswnw")
+
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_oul6g")
@@ -162,8 +202,8 @@ unique_name_in_owner = true
 position = Vector2(-1, -42)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_kqu6x")
-animation = &"idle"
-frame_progress = 0.611056
+animation = &"run"
+frame_progress = 0.648162
 offset = Vector2(2, -60)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -174,19 +214,84 @@ shape = SubResource("CapsuleShape2D_bjvpn")
 unique_name_in_owner = true
 one_shot = true
 
-[node name="WaponPivot" type="Node2D" parent="."]
-position = Vector2(-7, -57)
+[node name="WaponPivot" type="Node2D" parent="." node_paths=PackedStringArray("gun_muzzles")]
+position = Vector2(-7, -69)
 script = ExtResource("4_qjkh3")
+gun_muzzles = [NodePath("WeaponAnchor/Weapon/Sprite2D"), NodePath("WeaponAnchor/Weapon/Sprite2D2"), NodePath("WeaponAnchor/Weapon/Sprite2D3")]
 
 [node name="WeaponAnchor" type="Marker2D" parent="WaponPivot"]
 
 [node name="Weapon" parent="WaponPivot/WeaponAnchor" instance=ExtResource("3_g1dw6")]
+position = Vector2(0, 15)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("21_r7pn3")
+script = ExtResource("22_55jnj")
+spread_decay_time = 0.5
+extra_spread_per_shot = 0.1
+max_extra_spread = 0.6
 max_range = 500.0
 
 [node name="Marker2D" parent="WaponPivot/WeaponAnchor/Weapon" index="0"]
 position = Vector2(269.096, -60.4276)
+
+[node name="Sprite2D" type="Sprite2D" parent="WaponPivot/WeaponAnchor/Weapon"]
+visible = false
+modulate = Color(0.756038, 0.0649035, 0.0768904, 1)
+position = Vector2(432, -56)
+rotation = 1.57079
+scale = Vector2(0.484039, 0.599379)
+texture = ExtResource("22_jd2rm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="WaponPivot/WeaponAnchor/Weapon"]
+visible = false
+modulate = Color(1, 0.507761, 0.0823439, 1)
+position = Vector2(388, -56)
+rotation = 1.57079
+scale = Vector2(0.352907, 0.437)
+texture = ExtResource("22_jd2rm")
+
+[node name="Sprite2D3" type="Sprite2D" parent="WaponPivot/WeaponAnchor/Weapon"]
+visible = false
+modulate = Color(1, 0.82005, 0.135881, 1)
+position = Vector2(336, -56)
+rotation = 1.57079
+scale = Vector2(0.168548, 0.238135)
+texture = ExtResource("22_jd2rm")
+
+[node name="Gunshot" type="AudioStreamPlayer2D" parent="WaponPivot"]
+unique_name_in_owner = true
+position = Vector2(7, 57)
+stream = SubResource("AudioStreamRandomizer_2uvqg")
+volume_db = -10.0
+pitch_scale = 1.6
+
+[node name="Gunshot2" type="AudioStreamPlayer2D" parent="WaponPivot"]
+unique_name_in_owner = true
+position = Vector2(7, 57)
+stream = SubResource("AudioStreamRandomizer_2uvqg")
+volume_db = -10.0
+pitch_scale = 1.6
+
+[node name="Gunshot3" type="AudioStreamPlayer2D" parent="WaponPivot"]
+unique_name_in_owner = true
+position = Vector2(7, 57)
+stream = SubResource("AudioStreamRandomizer_2uvqg")
+volume_db = -10.0
+pitch_scale = 1.6
+
+[node name="Gunshot4" type="AudioStreamPlayer2D" parent="WaponPivot"]
+unique_name_in_owner = true
+position = Vector2(7, 57)
+stream = SubResource("AudioStreamRandomizer_2uvqg")
+volume_db = -10.0
+pitch_scale = 1.6
+
+[node name="Gunshot5" type="AudioStreamPlayer2D" parent="WaponPivot"]
+unique_name_in_owner = true
+position = Vector2(7, 57)
+stream = SubResource("AudioStreamRandomizer_2uvqg")
+volume_db = -10.0
+pitch_scale = 1.6
 
 [node name="ChapeuArea" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -198,11 +303,58 @@ script = ExtResource("22_s7qer")
 unique_name_in_owner = true
 scale = Vector2(0.1825, 0.1825)
 sprite_frames = SubResource("SpriteFrames_5ejfk")
-animation = &"idle"
+animation = &"voando"
+frame_progress = 0.928328
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChapeuArea"]
 position = Vector2(0, -9)
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_s7qer")
+
+[node name="FlyingHat" type="AudioStreamPlayer2D" parent="ChapeuArea"]
+stream = SubResource("AudioStreamRandomizer_jd2rm")
+volume_db = -18.0
+pitch_scale = 1.2
+
+[node name="Footsteps" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("31_2uvqg")
+volume_db = -18.5
+pitch_scale = 1.2
+
+[node name="Rolling" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_1s1yo")
+volume_db = -8.5
+pitch_scale = 1.2
+
+[node name="DeadBanana" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_ge24q")
+volume_db = 8.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.3, 1.3)
+limit_left = 0
+limit_top = 0
+limit_right = 1920
+limit_bottom = 1080
+limit_smoothed = true
+script = ExtResource("36_ge24q")
+
+[node name="HatBack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("37_pnw6m")
+volume_db = 18.0
+pitch_scale = 0.8
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.28)
+z_index = -1
+position = Vector2(0, 3)
+scale = Vector2(0.185, 0.06)
+texture = ExtResource("38_1so5t")
+
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_xcnuv")
+volume_db = 8.0
+pitch_scale = 1.5
 
 [editable path="WaponPivot/WeaponAnchor/Weapon"]

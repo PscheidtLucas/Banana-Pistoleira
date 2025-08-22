@@ -1,0 +1,100 @@
+[gd_scene load_steps=16 format=3 uid="uid://c3cfju43xt1oo"]
+
+[ext_resource type="Script" uid="uid://jnfgddbpxijm" path="res://game/destructible_box.gd" id="1_gxmbb"]
+[ext_resource type="Texture2D" uid="uid://dhm4duheyw3jb" path="res://shadow/simple-white-circle-and-drop-shadow-png.webp" id="2_5kgan"]
+[ext_resource type="Shader" uid="uid://dyh4phqbfr1k7" path="res://enemy/white_flash.gdshader" id="2_56lkx"]
+[ext_resource type="Texture2D" uid="uid://c0to13eqrjco2" path="res://game/Cenário/caixa para quebrar.png" id="3_5kgan"]
+[ext_resource type="AudioStream" uid="uid://dvdbs70e4de2x" path="res://sfx/Hit_hurt 16.wav" id="4_28dh4"]
+[ext_resource type="AudioStream" uid="uid://p863uufal4l0" path="res://sfx/wood-crack-1-105890.wav" id="6_5kgan"]
+
+[sub_resource type="Curve" id="Curve_28dh4"]
+_data = [Vector2(0.575188, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_56lkx"]
+curve = SubResource("Curve_28dh4")
+
+[sub_resource type="Curve" id="Curve_ls4ow"]
+_data = [Vector2(0.131579, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5kgan"]
+curve = SubResource("Curve_ls4ow")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qoi08"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(15, 15, 1)
+direction = Vector3(-1, -1, 0)
+spread = 30.0
+initial_velocity_min = 250.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.03
+scale_max = 0.04
+scale_curve = SubResource("CurveTexture_5kgan")
+color = Color(0.844632, 0.595496, 0.490598, 1)
+alpha_curve = SubResource("CurveTexture_56lkx")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eg035"]
+size = Vector2(78, 82)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_34hs4"]
+resource_local_to_scene = true
+shader = ExtResource("2_56lkx")
+shader_parameter/flash_strength = 0.0
+shader_parameter/red_strength = 0.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yxyey"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("4_28dh4")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_28dh4"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("6_5kgan")
+
+[node name="DestructibleBox" type="CharacterBody2D"]
+script = ExtResource("1_gxmbb")
+
+[node name="DamageParticle" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 50
+texture = ExtResource("2_5kgan")
+lifetime = 0.6
+one_shot = true
+preprocess = 0.2
+speed_scale = 1.5
+explosiveness = 0.69
+randomness = 1.0
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_qoi08")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 3)
+shape = SubResource("RectangleShape2D_eg035")
+
+[node name="BoxSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_34hs4")
+texture = ExtResource("3_5kgan")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0.008, 0.002, 0, 0.243)
+position = Vector2(1, 42)
+scale = Vector2(0.992862, 0.490173)
+skew = 0.499164
+texture = ExtResource("3_5kgan")
+offset = Vector2(0, 38.7618)
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_yxyey")
+volume_db = 8.0
+pitch_scale = 0.5
+
+[node name="DestroySound" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_28dh4")
+volume_db = 2.7
+pitch_scale = 0.9

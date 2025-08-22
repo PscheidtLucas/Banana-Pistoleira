@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var leaderboard_canvas_layer: CanvasLayer = $LeaderboardCanvasLayer
 @onready var panel: Panel = $Panel
 @onready var your_name: LineEdit = $Panel/YourName
+@onready var defeat_sound: AudioStreamPlayer = $DefeatSound
 
 
 func _ready() -> void:
@@ -11,6 +12,7 @@ func _ready() -> void:
 	hide()
 	player.player_died.connect(func()->void:
 		await get_tree().create_timer(1.5).timeout
+		defeat_sound.play()
 		show())
 
 func _on_button_pressed() -> void:

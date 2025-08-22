@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://b7ouejtd41g1o"]
+[gd_scene load_steps=38 format=3 uid="uid://b7ouejtd41g1o"]
 
 [ext_resource type="Script" uid="uid://bsitvu378tlg3" path="res://enemy/enemy.gd" id="1_2mvqj"]
+[ext_resource type="Shader" uid="uid://dyh4phqbfr1k7" path="res://enemy/white_flash.gdshader" id="1_34gv7"]
 [ext_resource type="Texture2D" uid="uid://bk88t38rxmdn5" path="res://enemy/Macaco/andar/andar 1.png" id="2_gf88j"]
 [ext_resource type="Script" uid="uid://beasnldm315q4" path="res://enemy/enemy_weapon.gd" id="2_ofsxj"]
 [ext_resource type="PackedScene" uid="uid://cvigvnuq577cm" path="res://weapon/bullet.tscn" id="3_ppra6"]
@@ -14,10 +15,55 @@
 [ext_resource type="Texture2D" uid="uid://cba7q58nom12x" path="res://enemy/Macaco/idle/idle 1.png" id="10_nfy00"]
 [ext_resource type="Texture2D" uid="uid://8sy0iuxefd2s" path="res://enemy/Macaco/idle/idle 2.png" id="11_iocd2"]
 [ext_resource type="Texture2D" uid="uid://chn6vtr58kn3r" path="res://enemy/Macaco/idle/idle 3.png" id="12_05kf6"]
+[ext_resource type="Texture2D" uid="uid://b3dbarwgkeq4o" path="res://particles/muzzle_02.png" id="15_c6eq3"]
+[ext_resource type="AudioStream" uid="uid://c5axlivn42ft1" path="res://sfx/inimigo shot.mp3" id="15_tbw0t"]
+[ext_resource type="AudioStream" uid="uid://cf852kmonxo25" path="res://sfx/monkey-352770.mp3" id="16_wjonb"]
+[ext_resource type="AudioStream" uid="uid://cf0vfeshabnp4" path="res://sfx/monkey-scream-1.wav" id="17_n2hyd"]
+[ext_resource type="AudioStream" uid="uid://cicgk3i4w88q2" path="res://sfx/monkey-scream-2.wav" id="18_c6eq3"]
+[ext_resource type="AudioStream" uid="uid://dvdbs70e4de2x" path="res://sfx/Hit_hurt 16.wav" id="21_pg32h"]
+[ext_resource type="Texture2D" uid="uid://dhm4duheyw3jb" path="res://shadow/simple-white-circle-and-drop-shadow-png.webp" id="22_nfy00"]
+[ext_resource type="AudioStream" uid="uid://cklc5wdkvrthj" path="res://sfx/head_shot_sfx.wav" id="23_iocd2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gf88j"]
-radius = 40.0
-height = 104.0
+radius = 38.0
+height = 76.0
+
+[sub_resource type="Curve" id="Curve_iocd2"]
+_data = [Vector2(0.575188, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pto6o"]
+curve = SubResource("Curve_iocd2")
+
+[sub_resource type="Curve" id="Curve_05kf6"]
+_data = [Vector2(0.131579, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6ynyu"]
+curve = SubResource("Curve_05kf6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_26s8d"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(15, 15, 1)
+direction = Vector3(-1, -1, 0)
+spread = 30.0
+initial_velocity_min = 250.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.03
+scale_max = 0.05
+scale_curve = SubResource("CurveTexture_6ynyu")
+color = Color(0.937445, 0, 0.256307, 1)
+alpha_curve = SubResource("CurveTexture_pto6o")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_34gv7"]
+resource_local_to_scene = true
+shader = ExtResource("1_34gv7")
+shader_parameter/flash_strength = 0.0
+shader_parameter/red_strength = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ofsxj"]
 animations = [{
@@ -30,7 +76,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"chase",
-"speed": 7.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 0.8,
@@ -48,20 +94,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_c6eq3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_34gv7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_pg32h")
-}],
-"loop": false,
-"name": &"shoot",
-"speed": 15.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("10_nfy00")
 }, {
 "duration": 1.0,
@@ -74,20 +106,79 @@ animations = [{
 "texture": ExtResource("11_iocd2")
 }],
 "loop": true,
-"name": &"stop",
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_c6eq3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_34gv7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_pg32h")
+}],
+"loop": false,
+"name": &"shoot",
 "speed": 10.0
 }]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wjonb"]
+random_pitch = 1.15
+streams_count = 1
+stream_0/stream = ExtResource("15_tbw0t")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rovcg"]
+random_pitch = 1.15
+streams_count = 1
+stream_0/stream = ExtResource("16_wjonb")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_34gv7"]
+random_pitch = 1.2
+streams_count = 2
+stream_0/stream = ExtResource("17_n2hyd")
+stream_1/stream = ExtResource("18_c6eq3")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pg32h"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("21_pg32h")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nfy00"]
+radius = 16.0312
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_iocd2"]
+random_pitch = 1.15
+streams_count = 1
+stream_0/stream = ExtResource("23_iocd2")
 
 [node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_2mvqj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -52)
+position = Vector2(0, -38)
 shape = SubResource("CapsuleShape2D_gf88j")
+
+[node name="Blood" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -60)
+emitting = false
+amount = 15
+texture = ExtResource("22_nfy00")
+lifetime = 0.6
+one_shot = true
+preprocess = 0.2
+speed_scale = 1.5
+explosiveness = 0.69
+randomness = 1.0
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_26s8d")
 
 [node name="AnimatedEnemySprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_34gv7")
 position = Vector2(0, -63)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_ofsxj")
@@ -112,6 +203,70 @@ max_bullet_speed = 600.0
 
 [node name="Marker2D" type="Marker2D" parent="WeaponPivot/Marker2D/EnemyWeapon"]
 
+[node name="Sprite2D" type="Sprite2D" parent="WeaponPivot/Marker2D/EnemyWeapon/Marker2D"]
+visible = false
+modulate = Color(0.89036, 0.094781, 0.104046, 1)
+position = Vector2(38.5027, -4.60557e-06)
+rotation = 1.57079
+scale = Vector2(0.132891, 0.16907)
+texture = ExtResource("15_c6eq3")
+
+[node name="Sprite2D2" type="Sprite2D" parent="WeaponPivot/Marker2D/EnemyWeapon/Marker2D"]
+visible = false
+modulate = Color(0.966306, 0.510177, 0.143204, 1)
+position = Vector2(30, 1.43051e-06)
+rotation = 1.57079
+scale = Vector2(0.0943228, 0.116799)
+texture = ExtResource("15_c6eq3")
+
+[node name="Sprite2D3" type="Sprite2D" parent="WeaponPivot/Marker2D/EnemyWeapon/Marker2D"]
+visible = false
+modulate = Color(1, 0.82005, 0.135881, 1)
+position = Vector2(25, 0)
+rotation = 1.57079
+scale = Vector2(0.0546543, 0.077219)
+texture = ExtResource("15_c6eq3")
+
 [node name="Timer" type="Timer" parent="WeaponPivot/Marker2D/EnemyWeapon"]
+unique_name_in_owner = true
 wait_time = 2.0
-autostart = true
+
+[node name="ShotSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_wjonb")
+volume_db = -2.0
+pitch_scale = 1.2
+
+[node name="MonkeySound" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_rovcg")
+volume_db = -8.0
+pitch_scale = 0.7
+
+[node name="MonkeyScream" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_34gv7")
+volume_db = -8.0
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_pg32h")
+volume_db = 8.0
+pitch_scale = 4.0
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.304)
+z_index = -1
+position = Vector2(0, 3)
+scale = Vector2(0.315, 0.08)
+texture = ExtResource("22_nfy00")
+
+[node name="HeadArea" type="Area2D" parent="." groups=["headshot"]]
+
+[node name="HeadCollision" type="CollisionShape2D" parent="HeadArea"]
+position = Vector2(0, -92)
+shape = SubResource("CircleShape2D_nfy00")
+
+[node name="HeadshotSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_iocd2")
+volume_db = -1.0
+pitch_scale = 0.85

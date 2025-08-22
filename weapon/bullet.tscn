@@ -4,9 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://c5avrddr45aho" path="res://weapon/bala ajustada.png" id="2_ge33b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8cc10"]
-size = Vector2(38, 13)
+size = Vector2(38, 17)
 
 [node name="Bullet" type="Area2D"]
+scale = Vector2(0.5, 0.5)
 monitorable = false
 script = ExtResource("1_d6cvk")
 
@@ -18,3 +19,5 @@ shape = SubResource("RectangleShape2D_8cc10")
 position = Vector2(-24, 0)
 scale = Vector2(0.7, 1)
 texture = ExtResource("2_ge33b")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
